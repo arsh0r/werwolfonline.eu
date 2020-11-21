@@ -1,0 +1,89 @@
+Die Gamer vom CoronaVPN
+--------------------------------------------------------------------------------
+
+Im Jahre 2020 trafen sich pandemiebedingt ein paar Freunde (fast) jeden Freitag
+zum gamen im CoronaVPN. Doch mit der Zeit wurde der flüssige Spielbetrieb immer
+häufiger gestört, weil andere Familienmitglieder oder die Nachbarn im selben
+Ortsnetz begannen immer mehr Bandbreite zum Streamen zu verwenden.
+
+Für bessere Latenzen ist den den Gamern jedes Mittel recht. Sie beschlossen
+gemeinsam jeden Abend einen Streamer dauerhaft vom Internet zu trennen. 
+
+Die Streamer bekommen natürlich mit, dass jeden Abend einer beim Videochatabend
+fehlt und versuchen herauszubekommen wer die Gamer unter Ihnen sind. Ist ein
+vermeintlich schuldiger gewählt wird er bei der Polizei angezeigt und seine
+Internetverbindung bis zum Abschluss der Ermittlungen erst mal gekappt.
+
+Charaktere:
+--------------------------------------------------------------------------------
+
+Gamer (Werwölfe): Die Gamer kennen sich gegenseitig. Sie wählen jeden Abend
+    einen Streamer aus den sie über z.B: Exploits im Router oder Schadsoftware
+    auf dem Computer sabotieren und dadurch dauerhaft vom Streamen abhalten.
+
+Streamer (Dorfbewohner): Die Streamer wissen nicht wer die Gamer unter ihnen
+    sind. Sie wählen jeden Abend beim Videochat einen Mitspieler den sie
+    verdächtigen ein Gamer zu sein und zeigen ihn bei der Polizei an.
+
+Influencer (Bürgermeister): Die Streamer wählen zu beginn des Spiels einen
+    Influencer. Er hat eine halbe Stimme mehr um Pattsituationen zu verhindern.
+
+IT-Spezialist (Hexer): Er besitzt die Fähigkeit die Sabotage an einem Streamer
+    noch in derselben Nacht rückgängig zu machen. Er kann aber auch absichtlich
+    den Internetzugang bei einem vermeintlichen Gamer sabotieren.
+
+BND Mitarbeiter (Seher): Er kann auf der Arbeit beliebige Internetzugänge
+    überwachen und den Datenverkehr genauer analysieren und somit herausfinden
+    welchen Charakter der Überwachte Spieler hat.
+
+ISP Mitarbeiter (Spion): Er kann auf der Arbeit beliebige Internetzugänge
+    überwachen und prüfen ob der überwachte Spieler den Charakter hat den er
+    vorgibt zu besitzen.
+
+Ermittler (Paranormaler Ermittler): Er arbeitet bei der Polizei und bekommt von
+    alldem recht wenig mit und versteht auch nix davon. Er kann einmal im Spiel
+    versuchen etwas zu ermitteln, kann dabei aber lediglich feststellen, ob
+    wenigstens einer von drei aufeinander folgenden Spielern ein Gamer oder
+    Pro-Gamer ist.
+
+Amor: Er kann einmal im Spiel zwei Mitspieler unsterblich ineinander verlieben. 
+    Diese Verliebten haben dann das Ziel, gemeinsam zu gewinnen. Wenn sie 
+    unterschiedlichen Gruppierungen (Gamer, Streamer) angehören, müssen sie alle
+    anderen Spieler gegen einander ausspielen, um zu gewinnen. Wird ein
+    Verliebter angezeigt oder sabotiert dann geht auch der andere aus Trauer
+    offline.
+
+Virenschutzverkäufer (Beschützer): Er installiert jede Nacht bei einem Spieler
+    die 1-Tages Trialversion einer Internetsecurity Software. Der beschützte
+    Spieler kann dann nicht sabotiert werden, leider geht der Verkäufer offline,
+    falls der beschützte Spieler angegriffen wird. Er kann sie auch bei sich
+    selber installieren und geht dadurch bei versuchter Sabotage nicht offline. 
+    Er darf die Trial nicht zwei Nächte hinter einander beim selben Spieler
+    aktivieren. 
+
+Hacker (Jäger): Der Hacker setzt wenn er sabotiert / angezeigt wird eine
+   Totmannschaltung in Gang die einen anderen Spieler ins analoge Nirvana bombt.
+
+Noob (Lykantroph): Er spielt für die Streamer führt sich aber auf wie ein Gamer
+   und wird deshalb von vielen Charakteren als Gamer erkannt, also sollte er auf
+   der Hut sein.
+
+Petze (Mordlustiger): Er hat die 112 auf der Schnellwahltaste von seinem Telefon.
+   Er zeigt die Nachbarn beim Falschparken an und filmt die Wiese um den
+   Hundebeseitzer zu finden der seinen Hund da immer draufkacken lässt.
+   
+Leecher (Pazifist): Er macht selber im Internet viele halblegale Sachen und hat
+   deshalb kein Interesse daran die Polizei zu rufen.
+
+Der Sparfuchs (Der Alte): Er hat schon länger nicht mehr in neuere Hardware
+   investiert. Sein Internetrouter gibt im Laufe des Spiels den Geist auf und
+   zwar um so früher, je weniger Gamer noch online sind. Sind zwei Gamer online,
+   geht er in der dritten Nacht offline. Bei drei Gamern in der vierten usw.
+   Geht aber ein Gamer während des Spiels offline, was ja durchaus möglich ist,
+   geht er früher offline als er gedacht hat.
+   
+Pro-Gamer (Urwolf): Dieser Gamer hat aber auch unter den Streamern Fans und
+   kann einmal im Spiel einen Streamer zum Gamer machen. Dieser Spieler verliert
+   dann alle seine bisherigen Fähigkeiten und spielt ab diesem Zeitpunkt für die
+   Gamer.
+

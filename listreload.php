@@ -162,7 +162,7 @@
         $buergermeisterRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1 AND wahlAuf = ".$temp['id']." AND buergermeister = 1");
         $buergermeisterText = ""; //Zeige nichts an, wenn der Bürgermeister ihn nicht ausgewählt hat
         if ($buergermeisterRes->num_rows > 0)
-          $buergermeisterText = " + Stimme des Bürgermeisters";
+          $buergermeisterText = " + Stimme des Influencers";
         $text.= $trennzeichen.$temp['name'].", normale Stimmen: ".$stimmenRes->num_rows.$buergermeisterText.$trennzeichen."2";
       }
       
@@ -194,7 +194,7 @@
         $buergermeisterRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1 AND wahlAuf = ".$temp['id']." AND buergermeister = 1");
         $buergermeisterText = ""; //Zeige nichts an, wenn der Bürgermeister ihn nicht ausgewählt hat
         if ($buergermeisterRes->num_rows > 0)
-          $buergermeisterText = " + Stimme des Bürgermeisters";
+          $buergermeisterText = " + Stimme des Influencers";
         $text.= $trennzeichen.$temp['name'].", normale Stimmen: ".$stimmenRes->num_rows.$buergermeisterText.$trennzeichen."2";
       }
       
@@ -245,7 +245,7 @@
         $text = "Morgen";
         break;
       case PHASEBUERGERMEISTERWAHL:
-        $text = "Bürgermeisterwahl";
+        $text = "Influencerwahl";
         break;
       case PHASEDISKUSSION:
         $text = "Diskussion";
@@ -269,46 +269,46 @@
       switch ($temp['nachtIdentitaet'])
       {
         case CHARDORFBEWOHNER:
-          $identitaet = "Dorfbewohner";
+          $identitaet = "Streamer";
           break;
         case CHARWERWOLF:
-          $identitaet = "Werwolf";
+          $identitaet = "Gamer";
           break;
         case CHARSEHER:
-          $identitaet = "Seher/in";
+          $identitaet = "BND Mitarbeiter/in";
           break;
         case CHARHEXE:
-          $identitaet = "Hexe/r";
+          $identitaet = "IT-Spezialist/in";
           break;
         case CHARJAEGER:
-          $identitaet = "Jäger/in";
+          $identitaet = "Hacker/Häckse";
           break;
         case CHARAMOR:
           $identitaet = "Amor";
           break;
         case CHARBESCHUETZER:
-          $identitaet = "Beschützer/in";
+          $identitaet = "Virenschutzverkäufer/in";
           break;
         case CHARPARERM:
-          $identitaet = "Paranormale(r) Ermittler/in";
+          $identitaet = "Ermittler/in";
           break;
         case CHARLYKANTROPH:
-          $identitaet = "Lykantroph/in";
+          $identitaet = "Noob/in";
           break;
         case CHARSPION:
-          $identitaet = "Spion/in";
+          $identitaet = "ISP Mitarbeiter/in";
           break;
         case CHARMORDLUSTIGER:
-          $identitaet = "Mordlustige(r)";
+          $identitaet = "Petze(r)";
           break;
         case CHARPAZIFIST:
-          $identitaet = "Pazifist/in";
+          $identitaet = "Leecher/in";
           break;
         case CHARALTERMANN:
-          $identitaet = "Alte(r)";
+          $identitaet = "Der Sparfuchs";
           break;
         case CHARURWOLF:
-          $identitaet = "Urwolf/Urwölfin"; 
+          $identitaet = "Pro-Gamer"; 
           break; 
       }
   //Eine Liste aller aktiver Spieler anzeigen
@@ -333,7 +333,7 @@
           //Zeige Tränke
           $heiltrank = $temp['hexeHeiltraenke'];
           $todestrank = $temp['hexeTodestraenke'];
-          $rueckgabe.= $trennzeichen.$temp['name']." ($identitaet, wach, Heiltränke: $heiltrank, Todestränke: $todestrank)".$trennzeichen."0";
+          $rueckgabe.= $trennzeichen.$temp['name']." ($identitaet, wach, Reserverouter: $heiltrank, Rootkits: $todestrank)".$trennzeichen."0";
         }
         else
         {
@@ -348,7 +348,7 @@
           //Zeige Tränke
           $heiltrank = $temp['hexeHeiltraenke'];
           $todestrank = $temp['hexeTodestraenke'];
-          $rueckgabe.= $trennzeichen.$temp['name']." ($identitaet, Heiltränke: $heiltrank, Todestränke: $todestrank)".$trennzeichen."0";
+          $rueckgabe.= $trennzeichen.$temp['name']." ($identitaet, Reserverouter: $heiltrank, Rootkits: $todestrank)".$trennzeichen."0";
         }
         else
         {
@@ -365,52 +365,52 @@
       switch ($temp['nachtIdentitaet'])
       {
         case CHARDORFBEWOHNER:
-          $identitaet = "Dorfbewohner";
+          $identitaet = "Streamer";
           break;
         case CHARWERWOLF:
-          $identitaet = "Werwolf";
+          $identitaet = "Gamer";
           break;
         case CHARSEHER:
-          $identitaet = "Seher/in";
+          $identitaet = "BND Mitarbeiter/in";
           break;
         case CHARHEXE:
-          $identitaet = "Hexe/r";
+          $identitaet = "IT-Spezialist/in";
           break;
         case CHARJAEGER:
-          $identitaet = "Jäger/in";
+          $identitaet = "Hacker/Häckse";
           break;
         case CHARAMOR:
           $identitaet = "Amor";
           break;
         case CHARBESCHUETZER:
-          $identitaet = "Beschützer/in";
+          $identitaet = "Virenschutzverkäufer/in";
           break;
         case CHARPARERM:
-          $identitaet = "Paranormale(r) Ermittler/in";
+          $identitaet = "Ermittler/in";
           break;
         case CHARLYKANTROPH:
-          $identitaet = "Lykantroph/in";
+          $identitaet = "Noob/in";
           break;
         case CHARSPION:
-          $identitaet = "Spion/in";
+          $identitaet = "ISP Mitarbeiter/in";
           break;
         case CHARMORDLUSTIGER:
-          $identitaet = "Mordlustige(r)";
+          $identitaet = "Petze(r)";
           break;
         case CHARPAZIFIST:
-          $identitaet = "Pazifist/in";
+          $identitaet = "Leecher/in";
           break;
         case CHARALTERMANN:
-          $identitaet = "Alte(r)";
+          $identitaet = "Der Sparfuchs";
           break;
         case CHARURWOLF:
-          $identitaet = "Urwolf/Urwölfin"; 
+          $identitaet = "Pro-Gamer"; 
           break; 
       }
   //Eine Liste aller aktiver Spieler anzeigen
   //zuerst alle Lebenden anzeigen
       
-      $rueckgabe.= $trennzeichen.$temp['name']." ($identitaet, tot)".$trennzeichen."4";
+      $rueckgabe.= $trennzeichen.$temp['name']." ($identitaet, offline)".$trennzeichen."4";
           
     }
     $mysqli->Query("UPDATE $spielID"."_game SET `list_tot` = '$rueckgabe', `list_tot_aktualisiert` = ". (int)(microtime(true)*1000));

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <HTML>
 <head>
-<title>Werwölfe</title>
+<title>Die Gamer vom CoronaVPN</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="Pragma" content="no-cache">
@@ -167,7 +167,7 @@ p#liste {
                   if ($buergermAss['id']==$eigeneID)
                   {
                     //Ich bin Bürgermeister
-                    echo "<p  class='normal'>Sie sind Bürgermeister</p>";
+                    echo "<p  class='normal'>Sie sind Influencer</p>";
                   }
                 }
                 
@@ -205,8 +205,8 @@ p#liste {
                   }
                   else
                   {
-                    echo "<p >Der Jäger wurde getötet</p>";
-                    echo "<p class='normal' >Warten auf Jäger</p>";
+                    echo "<p >Der Hacker wurde angezeigt oder sabotiert</p>";
+                    echo "<p class='normal' >Warten auf Hacker</p>";
                     $pageReload = true;
                   }
                 }
@@ -229,15 +229,15 @@ p#liste {
                         $mysqli->Query("UPDATE $spielID"."_spieler SET reload = 1");
                         $neuerBuergermeister = (int)$_POST['buergermeisterID'];
                         $mysqli->Query("UPDATE $spielID"."_spieler SET buergermeister = 1 WHERE id = $neuerBuergermeister");
-                        toGameLog($mysqli,getName($mysqli,$neuerBuergermeister)." wurde als Nachfolger des Bürgermeisters eingesetzt.");
-                        toAllPlayerLog($mysqli,getName($mysqli,$neuerBuergermeister)." wurde als Nachfolger des Bürgermeisters eingesetzt.");
+                        toGameLog($mysqli,getName($mysqli,$neuerBuergermeister)." wurde als Nachfolger des Influencers eingesetzt.");
+                        toAllPlayerLog($mysqli,getName($mysqli,$neuerBuergermeister)." wurde als Nachfolger des Influencers eingesetzt.");
                         $pageReload = true;
                       }
                       buergermeisterInitialisiere($mysqli);
                     }
                     else
                     {
-                      echo "<p >Der Bürgermeister wurde getötet</p>";
+                      echo "<p >Der Influencer wurde sabotiert</p>";
                       echo "<p class='normal' >Er darf sein Amt weitergeben</p>";
                       $pageReload = true;
                     }
@@ -491,9 +491,8 @@ p#liste {
                               //Zeige an, mit wem ich verliebt bin
                               echo "<form action='Werwolf.php' method='post'>";
                               echo "<p class='normal' >Der Pfeil des Amor, der nie sein Ziel verfehlt, trifft Sie und sie verlieben sich unsterblich ...</p>";
-                              echo "<p >Sie sind verliebt mit ".getName($mysqli,$eigeneAssoc['verliebtMit'])."</p>";
-                              echo "<p class='normal' >Sie spielen nun gemeinsam mit Ihrem Geliebten, gehören Sie unterschiedlichen Gruppierungen an,
-                              gewinnen Sie nur, wenn Sie alle anderen Spieler töten. Ansonsten gewinnen Sie wie gewohnt mit Ihrer Gruppierung (Dorfbewohner, Werwölfe)</p>";
+                              echo "<p >Sie sind verliebt in ".getName($mysqli,$eigeneAssoc['verliebtMit'])."</p>";
+                              echo "<p class='normal' >Sie spielen nun gemeinsam mit Ihrem Geliebten, gehören Sie unterschiedlichen Gruppierungen an, gewinnen Sie nur, wenn Sie alle anderen Spieler gegen einander ausspielen. Ansonsten gewinnen Sie wie gewohnt mit Ihrer Gruppierung (Streamer, Gamer)</p>";
                               //Auch den Charakter anzeigen
                               $verliebtRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE id = ".(int)$eigeneAssoc['verliebtMit']);
                               $verliebtAss = $verliebtRes->fetch_assoc();
@@ -695,7 +694,7 @@ p#liste {
                                 $timerZahl = $countdownBis - time()+1; 
                                 $timerAb = $countdownAb - time()+1;
                                 $aktBeiTime = true;
-                                $timerText = "Zeit, bis die Abstimmung der Werwölfe zu keinem Ergebnis führen kann: ";
+                                $timerText = "Zeit, bis die Abstimmung der Gamer zu keinem Ergebnis führen kann: ";
                                 
                                 //Überprüfe, ob es nicht jetzt schon eine Einstimmigkeit gibt...
                                 //Die Wahl muss nicht einstimmig sein ...
@@ -712,7 +711,7 @@ p#liste {
                                     $mysqli->Query("UPDATE $spielID"."_spieler SET bereit = 1, reload = 1 WHERE (nachtIdentitaet = ".CHARWERWOLF." OR nachtIdentitaet = ".CHARWERWOLF.")");
                                     $mysqli->Query("UPDATE $spielID"."_game SET werwolfopfer = $opfer");
                                     phaseBeendenWennAlleBereit(PHASENACHT3,$mysqli); //Schauen, ob wir die Phase schon beenden können
-                                    toGameLog($mysqli,"Die Wahl der Werwölfe fiel mehrheitlich auf: ".$temp['name']);
+                                    toGameLog($mysqli,"Die Wahl der Gamer fiel mehrheitlich auf: ".$temp['name']);
                                     break;
                                    }
                                 }
@@ -724,7 +723,7 @@ p#liste {
                                 $mysqli->Query("UPDATE $spielID"."_spieler SET bereit = 1, reload = 1 WHERE (nachtIdentitaet = ".CHARWERWOLF." OR nachtIdentitaet = ".CHARURWOLF.")");
                                 $mysqli->Query("UPDATE $spielID"."_game SET werwolfopfer = -1");
                                 phaseBeendenWennAlleBereit(PHASENACHT3,$mysqli); //Schauen, ob wir die Phase schon beenden können
-                                toGameLog($mysqli,"Die Werwölfe konnten sich nicht auf ein Opfer einigen ...");
+                                toGameLog($mysqli,"Die Gamer konnten sich nicht auf ein Opfer einigen ...");
                               }
                             }
                             else
@@ -735,9 +734,9 @@ p#liste {
                               $aktBeiTime = true;
                               $gameAssoc = gameAssoc($mysqli);
                               if ($gameAssoc['werwolfeinstimmig']==1)
-                                $timerText = "Zeit, bis die Abstimmung der Werwölfe nicht mehr einstimmig sein muss: ";
+                                $timerText = "Zeit, bis die Abstimmung der Gamer nicht mehr einstimmig sein muss: ";
                               else
-                                $timerText = "Zeit, bis die Abstimmung der Werwölfe zu keinem Ergebnis führen kann: ";
+                                $timerText = "Zeit, bis die Abstimmung der Gamer zu keinem Ergebnis führen kann: ";
                             }
                             if (isset($_POST['werwolfAuswahl']) && !$zeitAbgelaufen)
                             {
@@ -767,7 +766,7 @@ p#liste {
                                   $mysqli->Query("UPDATE $spielID"."_spieler SET bereit = 1, reload = 1 WHERE (nachtIdentitaet = ".CHARWERWOLF. " OR nachtIdentitaet = ". CHARURWOLF.")");
                                   $mysqli->Query("UPDATE $spielID"."_game SET werwolfopfer = $opfer");
                                   phaseBeendenWennAlleBereit(PHASENACHT3,$mysqli); //Schauen, ob wir die Phase schon beenden können
-                                  toGameLog($mysqli,"Die Wahl der Werwölfe fiel einstimmig auf: ". getName($mysqli,$opfer)); 
+                                  toGameLog($mysqli,"Die Wahl der Gamer fiel einstimmig auf: ". getName($mysqli,$opfer)); 
                                 }
                               }
                               else
@@ -786,7 +785,7 @@ p#liste {
                                     $mysqli->Query("UPDATE $spielID"."_spieler SET bereit = 1, reload = 1 WHERE nachtIdentitaet = ".CHARWERWOLF." OR nachtIdentitaet = ".CHARURWOLF);
                                     $mysqli->Query("UPDATE $spielID"."_game SET werwolfopfer = $opfer");
                                     phaseBeendenWennAlleBereit(PHASENACHT3,$mysqli); //Schauen, ob wir die Phase schon beenden können
-                                    toGameLog($mysqli,"Die Wahl der Werwölfe fiel mehrheitlich auf: ".$temp['name']);
+                                    toGameLog($mysqli,"Die Wahl der Gamer fiel mehrheitlich auf: ".$temp['name']);
                                     break;
                                    }
                                 }
@@ -797,7 +796,7 @@ p#liste {
                             $listReload=true;
                             echo "<form action='Werwolf.php' method='post'>";
                             echo '<input type="hidden" name="werwolfAuswahl" value=1 />';
-                            echo "<p class='normal' >Für den Tod welches Spielers wollen Sie stimmen?</p>";
+                            echo "<p class='normal' >Für die Sabotage welches Spielers wollen Sie stimmen?</p>";
                             echo "<p ><select name = 'werwolfID' size = 1>";
                             $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
                             while ($temp = $alleSpielerRes->fetch_assoc())
@@ -809,7 +808,7 @@ p#liste {
                             if ($gameAssoc['werwolfeinstimmig']==1)
                               echo "<p class='normal'>Zur Info: Die Wahl muss einstimmig sein, wählen Sie solange, bis die Wahl einstimmig ist</p>";
                             else
-                              echo "<p class='normal'>Zur Info: Die Mehrheit der Werwölfe bestimmt das Opfer (Einstimmigkeit bei mehr als 2 Spielern ist nicht erforderlich)</p>";
+                              echo "<p class='normal'>Zur Info: Die Mehrheit der Gamer bestimmt das Opfer (Einstimmigkeit bei mehr als 2 Spielern ist nicht erforderlich)</p>";
                             $pageReload = true; //Falls alle abgestimmt haben
                           }
                           else
@@ -862,8 +861,8 @@ p#liste {
                                   {
                                     $heilTraenkeNeu = (int)$eigeneAssoc['hexeHeiltraenke']-1;
                                     $mysqli->Query("UPDATE $spielID"."_spieler SET hexeHeiltraenke = $heilTraenkeNeu, hexeHeilt = 1 WHERE id = $eigeneID");
-                                    toPlayerLog($mysqli,"1 Heiltrank verwendet.",$eigeneID);
-                                    toGameLog($mysqli,"Die Hexe heilt das Opfer der Werwölfe.");
+                                    toPlayerLog($mysqli,"1 Reserverouter verwendet.",$eigeneID);
+                                    toGameLog($mysqli,"Der IT-Spezialist repariert den Internetzugang des Opfers der Gamer.");
                                   }
                                   else
                                   {
@@ -887,8 +886,8 @@ p#liste {
                                     $todestraenkeNeu = (int)$eigeneAssoc['hexeTodestraenke']-1;
                                     $hexenOpfer = (int)$_POST['toeten'];
                                     $mysqli->Query("UPDATE $spielID"."_spieler SET hexeTodestraenke = $todestraenkeNeu, hexenOpfer = $hexenOpfer WHERE id = $eigeneID");
-                                    toPlayerLog($mysqli,"1 Todestrank verwendet für Spieler ".getName($mysqli,$hexenOpfer),$eigeneID).".";
-                                    toGameLog($mysqli,"Die Hexe verwendet einen Todestrank, um ".getName($mysqli,$hexenOpfer)." zu töten.");
+                                    toPlayerLog($mysqli,"1 Rootkit verwendet für Spieler ".getName($mysqli,$hexenOpfer),$eigeneID).".";
+                                    toGameLog($mysqli,"Der IT-Spezialist verwendet einen Rootkit, um ".getName($mysqli,$hexenOpfer)." zu sabotieren.");
                                   }
                                   else
                                   {
@@ -1082,9 +1081,9 @@ p#liste {
                       elseif ($phase == PHASEBUERGERMEISTERWAHL)
                       {
                         characterButton($mysqli);
-                        echo "<h3 >Wahl des Bürgermeisters</h3>";
-                        echo "<p class='normal' >Da es momentan keinen Bürgermeister im Dorf gibt, beschließt das Dorf, einen zu wählen ...</p>";
-                        echo "<p class='normal' >Fragen Sie in die Runde, wer sich als Bürgermeister aufstellen lassen will und diskutieren Sie jede Bewerbung ...</p>";
+                        echo "<h3 >Wahl des Influencers</h3>";
+                        echo "<p class='normal' >Da es momentan keinen Influencer im Internet gibt, beschließt Ihr, einen zu wählen ...</p>";
+                        echo "<p class='normal' >Fragen Sie in die Runde, wer sich als Influencer aufstellen lassen will und diskutieren Sie jede Bewerbung ...</p>";
                         //Bürgermeisterwahl, ähnlich der Werwolfabstimmung
                         if (isset($_POST['buergermeisterWahlAuswahl']))
                         {
@@ -1116,8 +1115,8 @@ p#liste {
                               //Dieser Spieler hat die Mehrheit
                               $mysqli->Query("UPDATE $spielID"."_spieler SET bereit = 1");
                               $mysqli->Query("UPDATE $spielID"."_spieler SET buergermeister = 1 WHERE id = $id");
-                              toGameLog($mysqli,getName($mysqli,$id)." wurde zum Bürgermeister gewählt, abgestimmt haben: $text");
-                              toAllPlayerLog($mysqli,getName($mysqli,$id)." wurde zum Bürgermeister gewählt, abgestimmt haben: $text");
+                              toGameLog($mysqli,getName($mysqli,$id)." wurde zum Influencer gewählt, abgestimmt haben: $text");
+                              toAllPlayerLog($mysqli,getName($mysqli,$id)." wurde zum Influencer gewählt, abgestimmt haben: $text");
                               phaseBeendenWennAlleBereit(PHASEBUERGERMEISTERWAHL,$mysqli); 
                               break;
                             }
@@ -1127,7 +1126,7 @@ p#liste {
                         $listReload=true;
                         echo "<form action='Werwolf.php' method='post'>";
                         echo '<input type="hidden" name="buergermeisterWahlAuswahl" value=1 />';
-                        echo "<p class='normal' >Für welchen Spieler als Bürgermeister möchten Sie stimmen?</p>";
+                        echo "<p class='normal' >Für welchen Spieler als Influencer möchten Sie stimmen?</p>";
                         echo "<p ><select name = 'buergermeisterID' size = 1>";
                         $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
                         while ($temp = $alleSpielerRes->fetch_assoc())
@@ -1135,8 +1134,7 @@ p#liste {
                           echo "<option value = '".$temp['id']."'>".$temp['name']."</option>";
                         }
                         echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Für diesen Spieler stimmen"/></p></form>';
-                        echo "<p class='normal'>Der Bürgermeister beginnt Abstimmungen und erhält bei der Abstimmung des Dorfes jeden Tag eine zusätzliche halbe Stimme.
-                        Über 50% der Spieler müssen für den Bürgermeister stimmen, damit er gewählt wird</p>";
+                        echo "<p class='normal'>Der Influencer beginnt Abstimmungen und erhält bei der Abstimmung jeden Tag eine zusätzliche halbe Stimme. Über 50% der Spieler müssen für den Influencer stimmen, damit er gewählt wird</p>";
                         echo "</form>";
                         $pageReload = true; //Falls alle abgestimmt haben
                       }
@@ -1161,15 +1159,15 @@ p#liste {
                             //Zeige einen Button an, mit dem der Bürgermeister das Spiel fortführen kann
                             echo "<form action='Werwolf.php' method='post'>";
                             echo '<input type="hidden" name="buergermeisterWeiter" value=1 />';
-                            echo '<p id = "normal" align = "center">Sie als Bürgermeister dürfen entscheiden,
-                            wann es Zeit ist, die Diskussion zu beenden und zu den
-                            Anklagen überzugehen.<input type="submit" value = "Zu den Anklagen übergehen"/></p>';
+                            echo '<p id = "normal" align = "center">Sie als Influencer dürfen entscheiden,
+                            wann es Zeit ist, die Diskussion zu beenden und zur Entscheidung über die
+                            Anzeige überzugehen.<input type="submit" value = "Zu der Anzeige übergehen"/></p>';
                             echo "</form>";
                           }
                         }
                         //Alle sehen diesen Text
                         echo "<h3 >Diskussion</h3>";
-                        echo "<p class='normal' >Diskutieren Sie mit, versuchen Sie die Werwölfe zu entlarven, die anderen aber von Ihrer Unschuld zu überzeugen</p>";
+                        echo "<p class='normal' >Diskutieren Sie mit, versuchen Sie die Gamer zu entlarven, die anderen aber von Ihrer Unschuld zu überzeugen</p>";
                         $pageReload = true;
                       }
                       elseif ($phase == PHASEANKLAGEN)
@@ -1197,7 +1195,7 @@ p#liste {
                           {
                             //Wen möchte ich anklagen?
                             echo "<form action='Werwolf.php' method='post'>";
-                            echo "<p class='normal' >Wollen Sie einen Spieler anklagen?</p>";
+                            echo "<p class='normal' >Wollen Sie einen Spieler anzeigen?</p>";
                             echo "<p ><select name = 'angeklagterID' size = 1>";
                             echo "<option value = '-1'>Niemand</option>";
                             $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
@@ -1205,7 +1203,7 @@ p#liste {
                             {
                               echo "<option value = '".$temp['id']."'>".$temp['name']."</option>";
                             }
-                            echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Diesen Spieler anklagen"/></p></form>';
+                            echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Diesen Spieler anzeigen"/></p></form>';
                             echo "</form>";
                           }
                         }
@@ -1227,7 +1225,7 @@ p#liste {
                             echo "<form action='Werwolf.php' method='post'>";
                             echo '<input type="hidden" name="buergermeisterWeiter" value=1 />';
                             echo '<p id = "normal" align = "center"><input type="submit" value = "Zur Abstimmung übergehen"/></p>';
-                            echo "<p id = 'normal' align= 'center'>Achten Sie als Bürgermeister darauf, dass alle Angeklagten Zeit haben, sich zu verteidigen.</p>";
+                            echo "<p id = 'normal' align= 'center'>Achten Sie als Influencer darauf, dass alle Angeklagten Zeit haben, sich zu verteidigen.</p>";
                             echo "</form>";
                           }
                         }
@@ -1248,12 +1246,12 @@ p#liste {
                         {
                           //Zeit abgelaufen
                           endeDerAbstimmungEinfacheMehrheit(-1,$mysqli);
-                          toGameLog($mysqli,"Die Versammlung des Dorfes konnte sich nicht auf einen Spieler einigen, den sie töten will.");
-                          toAllPlayerLog($mysqli,"Die Versammlung des Dorfes konnte sich nicht auf einen Spieler einigen, den sie töten will.");
+                          toGameLog($mysqli,"Die Versammlung des Internets konnte sich nicht auf einen Spieler einigen, den sie anzeigen will.");
+                          toAllPlayerLog($mysqli,"Die Versammlung des Internets konnte sich nicht auf einen Spieler einigen, den sie anzeigen will.");
                         }
                         else
                         {
-                          $timerText = "Zeit, bis das Dorf zu keinem Ergebnis kommt: ";
+                          $timerText = "Zeit, bis das Internet zu keinem Ergebnis kommt: ";
                           $timerZahl = $eigeneAssoc['countdownBis'] - time()+1;
                           $timerAb = $eigeneAssoc['countdownAb']- time()+1;
                           $aktBeiTime = true;
@@ -1287,8 +1285,8 @@ p#liste {
                               if ($stimmen > (($anzahlSpieler+0.5)/2) && $id > -1)
                               {
                                 //Dieser Spieler hat die Mehrheit
-                                toGameLog($mysqli,getName($mysqli,$id)." wurde bei der Abstimmung zum Tode verurteilt, mit den Stimmen: $text");
-                                toAllPlayerLog($mysqli,getName($mysqli,$id)." wurde vom Dorf zum Tode verurteilt, mit den Stimmen: $text");
+                                toGameLog($mysqli,getName($mysqli,$id)." wurde bei der Polizei angezeigt, mit den Stimmen: $text");
+                                toAllPlayerLog($mysqli,getName($mysqli,$id)." wurde bei der Polizei angezeigt, mit den Stimmen: $text");
                                 endeDerAbstimmungEinfacheMehrheit($id,$mysqli);
                                 $wahlErfolgreich = 1; 
                                 break;
@@ -1382,8 +1380,8 @@ p#liste {
                         {
                           //Zeit abgelaufen
                           endeDerStichwahl(-1,$mysqli);
-                          toGameLog($mysqli,"Das Dorf konnte sich in der Stichwahl nicht auf einen Spieler einigen, den es töten will.");
-                          toAllPlayerLog($mysqli,"Das Dorf konnte sich auch in der Stichwahl nicht auf einen Spieler einigen, den es töten will.");
+                          toGameLog($mysqli,"Das Internet konnte sich in der Stichwahl nicht auf einen Spieler einigen, den es anzeigen will.");
+                          toAllPlayerLog($mysqli,"Das Internet konnte sich auch in der Stichwahl nicht auf einen Spieler einigen, den es anzeigen will.");
                         }
                         else
                         {
@@ -1422,8 +1420,8 @@ p#liste {
                               {
                                 //Dieser Spieler hat die Mehrheit
                                 $mysqli->Query("UPDATE $spielID"."_spieler SET bereit = 1");
-                                toGameLog($mysqli,getName($mysqli,$id)." wurde bei der Abstimmung zum Tode verurteilt, mit den Stimmen: $text");
-                                toAllPlayerLog($mysqli,getName($mysqli,$id)." wurde vom Dorf zum Tode verurteilt, mit den Stimmen: $text");
+                                toGameLog($mysqli,getName($mysqli,$id)." wurde bei der Polizei angezeigt, mit den Stimmen: $text");
+                                toAllPlayerLog($mysqli,getName($mysqli,$id)." wurde bei der Polizei angezeigt, mit den Stimmen: $text");
                                 endeDerStichwahl($id,$mysqli); 
                                 break;
                               }
@@ -1756,9 +1754,10 @@ if (isset($_COOKIE['SpielID']))
 ?>
 </section>
 <footer id="info">
-<?php echo "". _VERSION ?>, Erstellt von Florian Lindenbauer<br>
+<?php echo "". _VERSION ?>, Erstellt von Florian Lindenbauer, gemodded von arsh0r<br>
 <a href="http://www.werwolfonline.eu/info" target="_blank">Was ist Werwolf</a><br>
 <a href="http://www.werwolfonline.eu/info/index.php/anleitung" target="_blank">Anleitung</a><br>
+<a href="Die_Gamer_vom_CoronaVPN.txt" target="_blank">Charaktere</a><br>
 </footer>
 
 <script charset="ISO-8859-1" type="text/javascript">
@@ -2161,8 +2160,18 @@ function start()
   //Diese Funktion zeigt das Startformular an, bei dem der Nutzer aufgefordert wird, ein Spiel zu erstellen, oder eine ID einzugeben
    ?>
    <div id="gameselect">
-    <h3>Willkommen</h3>
-    <p class='normal'>Sie befinden sich momentan in keinem Spiel: Sie können entweder einem bereits erstellten Spiel beitreten oder ein neues Spiel erstellen!</p>
+    <h3>Die Gamer vom CoronaVPN</h3>
+    <p class="normal">Im Jahre 2020 trafen sich pandemiebedingt ein paar Freunde (fast) jeden Freitag
+    zum gamen im CoronaVPN. Doch mit der Zeit wurde der flüssige Spielbetrieb immer
+    häufiger gestört, weil andere Familienmitglieder oder die Nachbarn im selben
+    Ortsnetz begannen immer mehr Bandbreite zum Streamen zu verwenden.</p>
+    <p class="normal">Für bessere Latenzen ist den den Gamern jedes Mittel recht. Sie beschlossen
+    gemeinsam jeden Abend einen Streamer dauerhaft vom Internet zu trennen. </p>
+    <p class="normal">Die Streamer bekommen natürlich mit, dass jeden Abend einer beim Videochatabend
+    fehlt und versuchen herauszubekommen wer die Gamer unter Ihnen sind. Ist ein
+    vermeintlich schuldiger gewählt wird er bei der Polizei angezeigt und seine
+    Internetverbindung bis zum Abschluss der Ermittlungen erstmal gekappt.</p>
+    <p class="normal">Sie befinden sich momentan in keinem Spiel: Sie können entweder einem bereits erstellten Spiel beitreten oder ein neues Spiel erstellen!</p>
     <div><form action="Werwolf.php" method="post">
       <h3 >Einem Spiel beitreten</h3>
       <input type="hidden" name="neuesSpiel" value=2 />
@@ -2329,65 +2338,65 @@ function spielRegeln($mysqli)
   <form action='Werwolf.php' method='post' id='gamesettings' name='auswahl'>
     <input type='hidden' name='editierenAuswahl' value=1 />
     <div><h3 >Allgemein</h3>
-    <span><label for='buergermeisterID' >Bürgermeister </label>";
+    <span><label for='buergermeisterID' >Influencer </label>";
   if ($buergermeisterWeitergeben == 0)
-    echo "<select name = 'buergermeister' id='buergermeisterID' size = 1><option value = '0' selected=true>Beim Tod des Bürgermeisters wird ein neuer gewählt</option><option value = '1'>Der Bürgermeister gibt das Amt bei seinem Tod weiter</option></select></span>";
+    echo "<select name = 'buergermeister' id='buergermeisterID' size = 1><option value = '0' selected=true>Ist der Influencer offline wird ein neuer gewählt</option><option value = '1'>Der Influencer gibt das Amt weiter wenn er offline geht</option></select></span>";
   else
-    echo "<select name = 'buergermeister' id='buergermeisterID' size = 1><option value = '0'>Beim Tod des Bürgermeisters wird ein neuer gewählt</option><option value = '1' selected=true>Der Bürgermeister gibt das Amt bei seinem Tod weiter</option></select></span>";
-  echo "<span><label for='charaufdeckenID' >Tote Charaktere </label>";
+    echo "<select name = 'buergermeister' id='buergermeisterID' size = 1><option value = '0'>Ist der Influencer offline wird ein neuer gewählt</option><option value = '1' selected=true>Der Influencer gibt das Amt weiter wenn er offline geht</option></select></span>";
+  echo "<span><label for='charaufdeckenID' > Charaktere die offline sind </label>";
   if ($charaktereAufdecken == 0)
     echo "<select name = 'aufdecken' id='charaufdeckenID' size = 1><option value = '0' selected=true>nicht aufdecken</option><option value = '1'>aufdecken</option></select></span>";
   else
     echo "<select name = 'aufdecken' id='charaufdeckenID' size = 1><option value = '0'>nicht aufdecken</option><option value = '1' selected=true>aufdecken</option></select></span>";
-  echo "<span><label for='sehersiehtID' >Seher </label>";
+  echo "<span><label for='sehersiehtID' >BND Mitarbeiter </label>";
   if ($seherSiehtIdentitaet == 0)
-    echo "<select name = 'seherSieht' id='sehersiehtID' size = 1><option value = '0' selected=true>Seher sieht die Gesinnung</option><option value = '1'>Seher sieht die Identität</option></select></span>";
+    echo "<select name = 'seherSieht' id='sehersiehtID' size = 1><option value = '0' selected=true>BND Mitarbeiter sieht die Gesinnung</option><option value = '1'>BND Mitarbeiter sieht die Identität</option></select></span>";
   else
-    echo "<select name = 'seherSieht' id='sehersiehtID' size = 1><option value = '0' >Seher sieht die Gesinnung</option><option value = '1' selected=true>Seher sieht die Identität</option></select></span>";
+    echo "<select name = 'seherSieht' id='sehersiehtID' size = 1><option value = '0' >BND Mitarbeiter sieht die Gesinnung</option><option value = '1' selected=true>BND Mitarbeiter sieht die Identität</option></select></span>";
   echo "</div><div><h3 >Charaktere</h3>";
   if ($zufaelligauswaehlen == 0)
   {
-    echo "<span class='normal' ><label for='werwolfanzahl'>Werwölfe: </label><INPUT TYPE='number'  id='werwolfanzahl' NAME='werwoelfe' value=$werwolfzahl MIN=0>
+    echo "<span class='normal' ><label for='werwolfanzahl'>Gamer: </label><INPUT TYPE='number'  id='werwolfanzahl' NAME='werwoelfe' value=$werwolfzahl MIN=0>
       <INPUT TYPE='button' class='inc-dec-button' VALUE='+' NAME ='werwolfbutton1' OnClick='auswahl.werwoelfe.value=parseInt(auswahl.werwoelfe.value) + 1; '>
       <INPUT TYPE='button' class='inc-dec-button' VALUE='-' NAME ='werwolfbutton2' OnClick='auswahl.werwoelfe.value -=1 '></span>";
   }
   else
   {
-    echo "<span class='normal' ><label for='werwolfanzahl'>Werwölfe: </label><INPUT TYPE='number'  id='werwolfanzahl' NAME='werwoelfe' value=$werwolfzahl MIN=0 DISABLED = true>
+    echo "<span class='normal' ><label for='werwolfanzahl'>Gamer: </label><INPUT TYPE='number'  id='werwolfanzahl' NAME='werwoelfe' value=$werwolfzahl MIN=0 DISABLED = true>
       <INPUT TYPE='button' class='inc-dec-button' VALUE='+' NAME ='werwolfbutton1' DISABLED = true OnClick='auswahl.werwoelfe.value=parseInt(auswahl.werwoelfe.value) + 1; '>
       <INPUT TYPE='button' class='inc-dec-button' VALUE='-' NAME ='werwolfbutton2' DISABLED = true OnClick='auswahl.werwoelfe.value -=1 '></span>";
   }
-  echo "<span class='normal' ><label for='seheranzahl'> Seher: </label><INPUT TYPE='number'   NAME='seher' id='seheranzahl' Size='2' value=$seherzahl MIN=0>
+  echo "<span class='normal' ><label for='seheranzahl'> BND Mitarbeiter: </label><INPUT TYPE='number'   NAME='seher' id='seheranzahl' Size='2' value=$seherzahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.seher.value=parseInt(auswahl.seher.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.seher.value -=1 '></span>";
-  echo "<span class='normal' ><label for='hexenanzahl'>Hexe: </label><INPUT TYPE='number'   NAME='hexe' id='hexenanzahl' Size='2' value=$hexenzahl MIN=0>
+  echo "<span class='normal' ><label for='hexenanzahl'>IT-Spezialist: </label><INPUT TYPE='number'   NAME='hexe' id='hexenanzahl' Size='2' value=$hexenzahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.hexe.value=parseInt(auswahl.hexe.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.hexe.value -=1 '></span>";
-  echo "<span class='normal' ><label for='jaegeranzahl'>Jäger: </label><INPUT TYPE='number'   NAME='jaeger' id='jaegeranzahl' Size='2' value=$jaegerzahl MIN=0>
+  echo "<span class='normal' ><label for='jaegeranzahl'>Hacker: </label><INPUT TYPE='number'   NAME='jaeger' id='jaegeranzahl' Size='2' value=$jaegerzahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.jaeger.value=parseInt(auswahl.jaeger.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.jaeger.value -=1 '></span>";
-  echo "<span class='normal' ><label for='beschuetzeranzahl'>Beschützer: </label><INPUT TYPE='number'   NAME='beschuetzer' id='beschuetzeranzahl' Size='2' value=$beschuetzerzahl MIN=0>
+  echo "<span class='normal' ><label for='beschuetzeranzahl'>Virenschutzverkäufer: </label><INPUT TYPE='number'   NAME='beschuetzer' id='beschuetzeranzahl' Size='2' value=$beschuetzerzahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.beschuetzer.value=parseInt(auswahl.beschuetzer.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.beschuetzer.value -=1 '></span>";
-  echo "<span class='normal' ><label for='parermanzahl'>Paranormaler Ermittler: </label><INPUT TYPE='number'   NAME='parErm' id='parermanzahl' Size='2' value=$parErmZahl MIN=0>
+  echo "<span class='normal' ><label for='parermanzahl'>Ermittler: </label><INPUT TYPE='number'   NAME='parErm' id='parermanzahl' Size='2' value=$parErmZahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.parErm.value=parseInt(auswahl.parErm.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.parErm.value -=1 '></span>";
-  echo "<span class='normal' ><label for='lynkantrophenanzahl'>Lykantroph: </label><INPUT TYPE='number'   NAME='lykantrophen' id='lynkantrophenanzahl' Size='2' value=$lykantrophenzahl MIN=0>
+  echo "<span class='normal' ><label for='lynkantrophenanzahl'>Noob: </label><INPUT TYPE='number'   NAME='lykantrophen' id='lynkantrophenanzahl' Size='2' value=$lykantrophenzahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.lykantrophen.value=parseInt(auswahl.lykantrophen.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.lykantrophen.value -=1 '></span>";
-  echo "<span class='normal' ><label for='spionanzahl'>Spion: </label><INPUT TYPE='number'   NAME='spione' id='spionanzahl' Size='2' value=$spionezahl MIN=0>
+  echo "<span class='normal' ><label for='spionanzahl'>ISP Mitarbeiter: </label><INPUT TYPE='number'   NAME='spione' id='spionanzahl' Size='2' value=$spionezahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.spione.value=parseInt(auswahl.spione.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.spione.value -=1 '></span>";
-  echo "<span class='normal' ><label for='idiotenanzahl'>Mordlustige: </label><INPUT TYPE='number'   NAME='idioten' id='idiotenanzahl' Size='2' value=$idiotenzahl MIN=0>
+  echo "<span class='normal' ><label for='idiotenanzahl'>Petze: </label><INPUT TYPE='number'   NAME='idioten' id='idiotenanzahl' Size='2' value=$idiotenzahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.idioten.value=parseInt(auswahl.idioten.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.idioten.value -=1 '></span>";
-  echo "<span class='normal' ><label for='pazifistenanzahl'>Pazifist: </label><INPUT TYPE='number'   NAME='pazifisten' id='pazifistenanzahl' Size='2' value=$pazifistenzahl MIN=0>
+  echo "<span class='normal' ><label for='pazifistenanzahl'>Leecher: </label><INPUT TYPE='number'   NAME='pazifisten' id='pazifistenanzahl' Size='2' value=$pazifistenzahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.pazifisten.value=parseInt(auswahl.pazifisten.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.pazifisten.value -=1 '></span>";
-   echo "<span class='normal' ><label for='altenanzahl'>Die Alten: </label><INPUT TYPE='number'   NAME='alten' id='altenanzahl' Size='2' value=$altenzahl MIN=0>
+   echo "<span class='normal' ><label for='altenanzahl'>Der Sparfuchs: </label><INPUT TYPE='number'   NAME='alten' id='altenanzahl' Size='2' value=$altenzahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.alten.value=parseInt(auswahl.alten.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.alten.value -=1 '></span>";
-  echo "<span class='normal' ><label for='urwolfanzahl'>Urwolf / Urwölfin: </label><INPUT TYPE='number'   NAME='urwolf' id='urwolfanzahl' Size='2' value=$urwolfzahl MIN=0>
+  echo "<span class='normal' ><label for='urwolfanzahl'>Pro-Gamer: </label><INPUT TYPE='number'   NAME='urwolf' id='urwolfanzahl' Size='2' value=$urwolfzahl MIN=0>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='+' OnClick='auswahl.urwolf.value=parseInt(auswahl.urwolf.value) + 1; '>
     <INPUT TYPE='button' class='inc-dec-button' VALUE='-' OnClick='auswahl.urwolf.value -=1 '></span>";
   echo "<span class='normal' ><label for='amoranzahl'>Amor: </label><INPUT TYPE='number'   NAME='amor' id='armoranzahl' Size='2' value=$amorzahl MIN=0 MAX=1>
@@ -2402,24 +2411,24 @@ function spielRegeln($mysqli)
     auswahl.werwoelfe.disabled = true; auswahl.werwolfbutton1.disabled=true; auswahl.werwolfbutton2.disabled=true;}
     else {
     auswahl.werwoelfe.disabled = false;auswahl.werwolfbutton1.disabled=false; auswahl.werwolfbutton2.disabled=false;}'><label for='zufaelligauswaehlenID'> Die Charaktere verdeckt und zufällig auswählen </label></span>
-    <p class='normal' >Geben Sie dazu eine maximale Anzahl von Charakteren ein, die vorkommen sollen, bei Werwölfen müssen sie nichts eingeben<br>
-    Zusätzlich können Sie noch einen Wert eingeben, der die Verteilung bestimmt. Ein positiver Wert erleichtert das Spiel für die Dorfbewohner, ein negativer für die Werwölfe (nur bei der zufälligen Charakterverteilung)</p>";
+    <p class='normal' >Geben Sie dazu eine maximale Anzahl von Charakteren ein, die vorkommen sollen, bei Gamern müssen sie nichts eingeben<br>
+    Zusätzlich können Sie noch einen Wert eingeben, der die Verteilung bestimmt. Ein positiver Wert erleichtert das Spiel für die Streamer, ein negativer für die Gamer (nur bei der zufälligen Charakterverteilung)</p>";
   echo "<span class='normal' ><label for='zufaelligeAuswahlBonusID'> Verteilung der zufälligen Charaktere </label><INPUT TYPE='number'   NAME='zufaelligeAuswahlBonus' id='zufaelligeAuswahlBonusID' Size='2' value=$zufaelligeAuswahlBonus MIN=-15 MAX=15></span>";
   echo "</div>";
   echo "<div><h3 >Countdown-Einstellungen</h3>";
   echo "<span class='normal' ><INPUT TYPE='button' VALUE='Countdowns zurücksetzen' OnClick='auswahl.werwolftimer1.value=60; auswahl.werwolfzusatz1.value=4; auswahl.werwolftimer2.value=50; auswahl.werwolfzusatz2.value=3; auswahl.dorftimer.value=550; auswahl.dorfzusatz.value=10; auswahl.dorfstichwahltimer.value=200; auswahl.dorfstichwahlzusatz.value=5'></span>";
-  echo "<span class='normal' ><label for='werwolftimer1ID'>Sekunden, bis die Werwölfe nicht mehr einstimmig wählen müssen: </label>
+  echo "<span class='normal' ><label for='werwolftimer1ID'>Sekunden, bis die Gamer nicht mehr einstimmig wählen müssen: </label>
     <INPUT TYPE='number' NAME='werwolftimer1' id='werwolftimer1ID' SIZE='2' VALUE=$werwolftimer1 MIN='20' MAX='500'><br>
-    <label for='werwolfzusatz1ID'>Zusätzliche Zeit pro Werwolf: </label><INPUT TYPE='number' NAME='werwolfzusatz1' id='werwolfzusatz1ID' SIZE='2' VALUE=$werwolfzusatz1 MIN='0' MAX='60'></span>";
-  echo "<span class='normal' ><label for='werwolftimer2ID'>Sekunden, bis nach Ablaufen der Einstimmigkeit die Wahl der Werwölfe erfolglos ist: </label>
+    <label for='werwolfzusatz1ID'>Zusätzliche Zeit pro Gamer: </label><INPUT TYPE='number' NAME='werwolfzusatz1' id='werwolfzusatz1ID' SIZE='2' VALUE=$werwolfzusatz1 MIN='0' MAX='60'></span>";
+  echo "<span class='normal' ><label for='werwolftimer2ID'>Sekunden, bis nach Ablaufen der Einstimmigkeit die Wahl der Gamer erfolglos ist: </label>
     <INPUT TYPE='number' NAME='werwolftimer2' id='werwolftimer2ID' SIZE='2' VALUE=$werwolftimer2 MIN='10' MAX='500'><br>
-    <label for='werwolfzusatz2ID'>Zusätzliche Zeit pro Werwolf: </label><INPUT TYPE='number' NAME='werwolfzusatz2' id='werwolfzusatz2ID' SIZE='2' VALUE=$werwolfzusatz2 MIN='0' MAX='60'></span>";
-  echo "<span class='normal' ><label for='dorftimerID'>Sekunden, bis die normale Abstimmung des Dorfes am Tag erfolglos ist: </label>
+    <label for='werwolfzusatz2ID'>Zusätzliche Zeit pro Gamer: </label><INPUT TYPE='number' NAME='werwolfzusatz2' id='werwolfzusatz2ID' SIZE='2' VALUE=$werwolfzusatz2 MIN='0' MAX='60'></span>";
+  echo "<span class='normal' ><label for='dorftimerID'>Sekunden, bis die normale Abstimmung des Internets am Tag erfolglos ist: </label>
     <INPUT TYPE='number' NAME='dorftimer' id='dorftimerID' SIZE='2' VALUE=$dorftimer MIN='60' MAX='7200'><br>
-    <label for='dorfzusatzID'>Zusätzliche Zeit pro Dorfbewohner: </label><INPUT TYPE='number' NAME='dorfzusatz' id='dorfzusatzID' SIZE='2' VALUE=$dorfzusatz MIN='0' MAX='300'></span>";
+    <label for='dorfzusatzID'>Zusätzliche Zeit pro Streamer: </label><INPUT TYPE='number' NAME='dorfzusatz' id='dorfzusatzID' SIZE='2' VALUE=$dorfzusatz MIN='0' MAX='300'></span>";
   echo "<span class='normal' ><label for='dorfstichwahltimerID'>Sekunden, bis die Stichwahl am Tag erfolglos ist: </label>
     <INPUT TYPE='number' NAME='dorfstichwahltimer' id='dorfstichwahltimerID' SIZE='2' VALUE=$dorfstichwahltimer MIN='30' MAX='3600'><br>
-    <label for='dorfstichwahlzusatzID'>Zusätzliche Zeit pro Dorfbewohner: </label><INPUT TYPE='number' NAME='dorfstichwahlzusatz' id='dorfstichwahlzusatzID' SIZE='2' VALUE=$dorfstichwahlzusatz MIN='0' MAX='300'></span>"; 
+    <label for='dorfstichwahlzusatzID'>Zusätzliche Zeit pro Streamer: </label><INPUT TYPE='number' NAME='dorfstichwahlzusatz' id='dorfstichwahlzusatzID' SIZE='2' VALUE=$dorfstichwahlzusatz MIN='0' MAX='300'></span>";
   echo "</div><span align = 'center'><input type='submit' value = 'Speichern'/></span>";
   echo "</form>";
 }
@@ -2554,7 +2563,7 @@ function spielInitialisieren($mysqli,$spielerzahl)
   $boeseCharaktere = $werwolfzahl + $urwolfzahl;
   if ($boeseCharaktere < 1 && $zufaelligeAuswahl == 0)
   {
-    echo "<p class='error' >Ein Spiel mit dieser Konfiguration ist nicht möglich. Haben Sie mindestens einen Werwolf ausgewählt?</p>";
+    echo "<p class='error' >Ein Spiel mit dieser Konfiguration ist nicht möglich. Haben Sie mindestens einen Gamer ausgewählt?</p>";
     return false;
   }
   
@@ -2673,9 +2682,7 @@ function spielStarten($mysqli)
     }
     
     toGameLog($mysqli,"Ein neues Spiel wird gestartet mit $spielerzahl Spielern. Die Charaktere werden zufällig verteilt.");
-    $spielinfo = "Maximal im Spiel: Werwölfe: $spielerzahl, Hexen: $hexenzahl, Seher: $seherzahl, Jäger: $jaegerzahl, Amor: $amorzahl, 
-      Beschützer: $beschuetzerzahl, Paranormaler Ermittler: $parErmZahl, Lykantrophen: $lykantrophenzahl,
-      Spione: $spionezahl, Mordlustige: $idiotenzahl, Pazifisten: $pazifistenzahl, Die Alten: $altenzahl, Urwölfe: $urwolfzahl";
+    $spielinfo = "Maximal im Spiel: Gamer: $spielerzahl, IT-Spezialisten: $hexenzahl, BND Mitarbeiter: $seherzahl, Hacker:$jaegerzahl, Amor: $amorzahl, Virenschutzverkäufer: $beschuetzerzahl, Ermittler: $parErmZahl, Noobs: $lykantrophenzahl, ISP Mitarbeiter: $spionezahl, Petzen: $idiotenzahl, Leecher: $pazifistenzahl, Sparfüchse: $altenzahl, Pro-Gamer: $urwolfzahl";
     toGameLog($mysqli,$spielinfo);
     toAllPlayerLog($mysqli,"Ein neues Spiel wird gestartet mit $spielerzahl Spielern. Die Charaktere werden zufällig verteilt.");
     toAllPlayerLog($mysqli,$spielinfo); 
@@ -2756,7 +2763,7 @@ function spielStarten($mysqli)
     {
       //Verteilung fehlgeschlagen!
       //Notverteilung
-      toGameLog($mysqli,"Zufällige Verteilung der Charaktere fehlgeschlagen. Teile nur Werwölfe aus.");
+      toGameLog($mysqli,"Zufällige Verteilung der Charaktere fehlgeschlagen. Teile nur Gamer aus.");
       $werwolfzahl = round($spielerzahl/6)+1;
       $hexenzahl = 0;
       $jaegerzahl = 0;
@@ -2771,18 +2778,14 @@ function spielStarten($mysqli)
       $altenzahl = 0;
       $urwolfzahl = 0;
     }
-    $spielinfo = "Im Spiel befinden sich: Werwölfe: $werwolfzahl, Hexen: $hexenzahl, Seher: $seherzahl, Jäger: $jaegerzahl, Amor: $amorzahl, 
-      Beschützer: $beschuetzerzahl, Paranormaler Ermittler: $parErmZahl, Lykantrophen: $lykantrophenzahl,
-      Spione: $spionezahl, Mordlustige: $idiotenzahl, Pazifisten: $pazifistenzahl, Die Alten: $altenzahl, Urwölfe: $urwolfzahl";
+    $spielinfo = "Im Spiel befinden sich: Gamer: $werwolfzahl, IT-Spezialisten: $hexenzahl, BND Mitarbeiter: $seherzahl, Hacker: $jaegerzahl, Amor: $amorzahl, Virenschutzverkäufer: $beschuetzerzahl, Ermittler: $parErmZahl, Noobs: $lykantrophenzahl, ISP Mitarbeiter: $spionezahl, Petzen: $idiotenzahl, Leecher: $pazifistenzahl, Sparfüchse: $altenzahl, Pro-Gamer: $urwolfzahl";
     toGameLog($mysqli,$spielinfo);
   }
   else
   {
     //Logge den Spielstart
     toGameLog($mysqli,"Ein neues Spiel wird gestartet mit $spielerzahl Spielern.");
-    $spielinfo = "Werwölfe: $werwolfzahl, Hexen: $hexenzahl, Seher: $seherzahl, Jäger: $jaegerzahl, Amor: $amorzahl, 
-      Beschützer: $beschuetzerzahl, Paranormaler Ermittler: $parErmZahl, Lykantrophen: $lykantrophenzahl,
-      Spione: $spionezahl, Mordlustige: $idiotenzahl, Pazifisten: $pazifistenzahl, Die Alten: $altenzahl, Urwölfe: $urwolfzahl";
+    $spielinfo = "Gamer: $werwolfzahl, IT-Spezialisten: $hexenzahl, BND Mitarbeiter: $seherzahl, Hacker: $jaegerzahl, Amor: $amorzahl, Virenschutzverkäufer: $beschuetzerzahl, Ermittler: $parErmZahl, Noobs: $lykantrophenzahl, ISP Mitarbeiter: $spionezahl, Petzen: $idiotenzahl, Leecher: $pazifistenzahl, Sparfüchse: $altenzahl, Pro-Gamer: $urwolfzahl";
     toGameLog($mysqli,$spielinfo);
     toAllPlayerLog($mysqli,"Ein neues Spiel wird gestartet mit $spielerzahl Spielern.");
     toAllPlayerLog($mysqli,$spielinfo);
@@ -2999,7 +3002,7 @@ function phaseInitialisieren($phase,$mysqli)
 
     //Nun töte alle Toten und schreib die Namen in einen String zwecks Anzeige
     $mysqli->query("UPDATE $spielID"."_spieler SET dieseNachtGestorben = 0");
-    $anzeigeString = "Am Morgen findet das Dorf folgende Tote: ";
+    $anzeigeString = "Am Morgen fehlen folgende Spieler beim Videochat: ";
     foreach ($tote as $i => $id)
     {
       if ($id > -1)
@@ -3013,7 +3016,7 @@ function phaseInitialisieren($phase,$mysqli)
     if ($toteQuery->num_rows < 1)
     {
       //keiner wurde getötet
-      $anzeigeString = "Diese Nacht ist niemand gestorben.";
+      $anzeigeString = "Diese Nacht wurde niemand sabotiert.";
     }
     else
     {
@@ -3097,7 +3100,7 @@ function toeteSpieler($mysqli, $spielerID)
   {
     //Der Jäger wurde getötet
     $mysqli->Query("UPDATE $spielID"."_spieler SET jaegerDarfSchiessen = 1 WHERE id = $spielerID");
-    toGameLog($mysqli,"Der Jäger wurde getötet.");
+    toGameLog($mysqli,"Der Hacker wurde angezeigt oder sabotiert.");
   }
   
   //Nachschauen, ob er der Bürgermeister ist ... und wir Bürgermeister weitergeben aktiviert haben....
@@ -3107,7 +3110,7 @@ function toeteSpieler($mysqli, $spielerID)
     if ($gameAssoc['buergermeisterWeitergeben']==1)
     {
       //Der alte Bürgermeister wählt den aus, an den er den Bürgermeister weitergeben will
-      toGameLog($mysqli, "Der Bürgermeister wurde getötet. Er darf dieses Amt weitergeben ...");
+      toGameLog($mysqli, "Der Influencer wurde sabotiert. Er darf dieses Amt weitergeben ...");
       $mysqli->Query("UPDATE $spielID"."_spieler SET buergermeisterDarfWeitergeben = 1 WHERE id = $spielerID");
     }
   }
@@ -3120,13 +3123,13 @@ function toeteSpieler($mysqli, $spielerID)
   $gameA = gameAssoc($mysqli);
   if ($gameA['charaktereAufdecken']==1)
   {
-    toAllPlayerLog($mysqli,getName($mysqli,$spielerID)."(".nachtidentitaetAlsString($temp['nachtIdentitaet']).") stirbt.");
+    toAllPlayerLog($mysqli,getName($mysqli,$spielerID)."(".nachtidentitaetAlsString($temp['nachtIdentitaet']).") geht offline.");
   }
   else
   {
-    toAllPlayerLog($mysqli,getName($mysqli,$spielerID)." stirbt.");
+    toAllPlayerLog($mysqli,getName($mysqli,$spielerID)." geht offline.");
   }
-  toGameLog($mysqli,getName($mysqli,$spielerID)."(".nachtidentitaetAlsString($temp['nachtIdentitaet']).") stirbt.");
+  toGameLog($mysqli,getName($mysqli,$spielerID)."(".nachtidentitaetAlsString($temp['nachtIdentitaet']).") geht offline.");
   
   //Nachschauen, ob der Spieler verliebt war, denn dann stirbt der andere auch
   if ($temp['verliebtMit']>-1)
@@ -3135,7 +3138,7 @@ function toeteSpieler($mysqli, $spielerID)
     $verliebtRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1 AND id = ".$temp['verliebtMit']);
     if ($verliebtRes->num_rows > 0)
     {
-      toGameLog($mysqli,"Der Verliebte stirbt mit dem anderen.");
+      toGameLog($mysqli,"Der Verliebte geht mit dem anderen offline.");
       //Er lebt noch --> töte ihn
       toeteSpieler($mysqli,$temp['verliebtMit']);
     }
@@ -3216,7 +3219,7 @@ function spionInitialisiere($mysqli)
   //Zeige eine Liste aller lebenden Spieler an
   echo "<form action='Werwolf.php' method='post'>";
   echo '<input type="hidden" name="spionHatAusgewaehlt" value=1 />';
-  echo "<p class='normal' >Sie als Spion(in) dürfen die Identität eines Spielers überprüfen. Welchen Spieler möchten Sie näher betrachten?</p>";
+  echo "<p class='normal' >Sie als ISP Mitarbeiter können den Internetzugang eines Spielers überprüfen. Welchen Spieler möchten Sie näher betrachten?</p>";
   echo "<p ><select name = 'spionID' size = 1>";
   $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
   while ($temp = $alleSpielerRes->fetch_assoc())
@@ -3274,8 +3277,8 @@ function urwolfInitialisiere($mysqli)
   //Zeige eine Liste aller lebenden Spieler an
   echo "<form action='Werwolf.php' method='post'>";
   echo '<input type="hidden" name="urwolfHatAusgewaehlt" value=1 />';
-  echo "<p class='normal' >Sie als Urwolf/Urwölfin können einmal im Spiel einen anderen Spieler zum Werwolf machen. Wen wollen Sie wählen?<br>
-  Wenn Sie niemanden zum Werwolf machen wollen, wählen sie 'Niemand' aus</p>";
+  echo "<p class='normal' >Sie als Pro-Gamer können einmal im Spiel einen Spieler zum Gamer machen. Wen wollen Sie wählen?<br>
+  Wenn Sie niemanden zum Gamer machen wollen, wählen sie 'Niemand' aus</p>";
   echo "<p ><select name = 'urwolfID' size = 1>";
   echo "<option value = '-1'>Niemand</option>";
   $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
@@ -3283,7 +3286,7 @@ function urwolfInitialisiere($mysqli)
   {
     echo "<option value = '".$temp['id']."'>".$temp['name']."</option>";
   }
-  echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Diesen Spieler zum Werwolf machen"/></p></form>';
+  echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Diesen Spieler zum Gamer machen"/></p></form>';
 }
 
 function urwolfHandle($mysqli, $id)
@@ -3309,16 +3312,16 @@ function urwolfHandle($mysqli, $id)
     $identitaet = $spielerAssoc['nachtIdentitaet'];
     $strIdentitaet = nachtidentitaetAlsString($identitaet);
     
-    $text = $spielerAssoc['name']." ist jetzt ein Werwolf!";
+    $text = $spielerAssoc['name']." ist jetzt ein Gamer!";
     $stmt->close();
     echo "<h1 >$text</h1>";
     
     //Schreibe es auch ins playerlog, damit es der Spieler nachlesen kann
     toPlayerLog($mysqli, $text, $eigeneID);
-    toPlayerLog($mysqli, "Sie wurden vom Urwolf/von der Urwölfin zu einem Werwolf gemacht. Sie verlieren alle bisherigen Fähigkeiten und spielen nun für die Werwölfe! Viel Erfolg!", $id);
-    toGameLog($mysqli,getName($mysqli,$eigeneID)."(Urwolf/Urwölfin)  macht ".$spielerAssoc['name']."($strIdentitaet) zum Werwolf.");
+    toPlayerLog($mysqli, "Sie wurden vom Pro-Gamer zu einem Gamer gemacht. Sie verlieren alle bisherigen Fähigkeiten und spielen nun für die Gamer! Viel Erfolg!", $id);
+    toGameLog($mysqli,getName($mysqli,$eigeneID)."(Pro-Gamer)  macht ".$spielerAssoc['name']."($strIdentitaet) zum Gamer.");
     
-    $stmt = $mysqli->prepare("UPDATE $spielID"."_spieler SET nachtIdentitaet = ". CHARWERWOLF .", popup_text = 'Du wurdest vom Urwolf / von der Urwölfin zu einem Werwolf gemacht und spielst jetzt für die Werwölfe!' WHERE id = ?");
+    $stmt = $mysqli->prepare("UPDATE $spielID"."_spieler SET nachtIdentitaet = ". CHARWERWOLF .", popup_text = 'Du wurdest vom Pro-Gamer zu einem Gamer gemacht und spielst jetzt für die Gamer!' WHERE id = ?");
     $stmt->bind_param('i',$id);
     $stmt->execute();
     $stmt->close();
@@ -3340,7 +3343,7 @@ function seherInitialisiere($mysqli)
   //Zeige eine Liste aller lebenden Spieler an
   echo "<form action='Werwolf.php' method='post'>";
   echo '<input type="hidden" name="seherHatAusgewaehlt" value=1 />';
-  echo "<p class='normal' >Sie als Seher(in) dürfen die Identität eines Spielers erfahren. Welchen Spieler möchten Sie näher betrachten?</p>";
+  echo "<p class='normal' >Sie als BND Mitarbeiter können auf der Arbeit den Internetzugang eines Spielers überwachen und so dessen Identität erfahren. Welchen Spieler möchten Sie überwachen?</p>";
   echo "<p ><select name = 'seherID' size = 1>";
   $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
   while ($temp = $alleSpielerRes->fetch_assoc())
@@ -3381,7 +3384,7 @@ function seherSehe($mysqli, $id)
   
   //Schreibe es auch ins playerlog, damit es der Spieler nachlesen kann
   toPlayerLog($mysqli, $spielerAssoc['name']." = $identitaet",$eigeneID);
-  toGameLog($mysqli,"Der Seher/Die Seherin(".getName($mysqli,$eigeneID).") sieht die Nachtidentitaet von Spieler ".$spielerAssoc['name']." = $identitaet .");
+  toGameLog($mysqli,"Der BND Mitarbeiter(".getName($mysqli,$eigeneID).") sieht die Nachtidentitaet von Spieler ".$spielerAssoc['name']." = $identitaet .");
   
   //Setze mich noch auf bereit ;)
   $mysqli->Query("UPDATE $spielID"."_spieler SET bereit = 1 WHERE id = $eigeneID");
@@ -3395,19 +3398,19 @@ function beschuetzerInitialisiere($mysqli)
   //Zeige an, wer letzte Nacht beschützt wurde...
   $eigeneAssoc = eigeneAssoc($mysqli);
   if ($eigeneAssoc['beschuetzerLetzteRundeBeschuetzt'] >= 0)
-    echo "<p class='normal' >Letzte Nacht beschützten Sie ".getName($mysqli,$eigeneAssoc['beschuetzerLetzteRundeBeschuetzt'])."</p>";
+    echo "<p class='normal' >Letzte Nacht haben Sie die Trial bei diesem Spieler aktiviert: ".getName($mysqli,$eigeneAssoc['beschuetzerLetzteRundeBeschuetzt'])."</p>";
   
   //Zeige eine Liste aller lebenden Spieler an
   echo "<form action='Werwolf.php' method='post'>";
   echo '<input type="hidden" name="beschuetzerHatAusgewaehlt" value=1 />';
-  echo "<p class='normal' >Sie als Beschützer(in) dürfen einen Spieler diese Nacht beschützen (Auch Sie selbst)</p>";
+  echo "<p class='normal' >Sie als Virenschutzverkäufer(in) dürfen bei einem Spieler die 1-Tages Trialversion einer Internetsecuritysoftware aktivieren (Auch bei Ihnen selbst)</p>";
   echo "<p ><select name = 'beschuetzerID' size = 1>";
   $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
   while ($temp = $alleSpielerRes->fetch_assoc())
   {
     echo "<option value = '".$temp['id']."'>".$temp['name']."</option>";
   }
-  echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Diese Person beschützen"/></p></form>';
+  echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Diese Person schützen"/></p></form>';
 }
 
 function beschuetzerAuswahl($mysqli,$id)
@@ -3427,8 +3430,8 @@ function beschuetzerAuswahl($mysqli,$id)
   
   $gameAssoc = gameAssoc($mysqli);
   //Schreibe es auch ins playerlog, damit es der Spieler nachlesen kann
-  toPlayerLog($mysqli, "In Nacht ".$gameAssoc['nacht']." beschützen Sie ".getName($mysqli,$id).".",$eigeneID);
-  toGameLog($mysqli,"Der Beschützer/Die Beschützerin(".getName($mysqli,$eigeneID).") beschützt in Nacht ".$gameAssoc['nacht']." ".getName($mysqli,$id).".");
+  toPlayerLog($mysqli, "In Nacht ".$gameAssoc['nacht']." schützen Sie ".getName($mysqli,$id).".",$eigeneID);
+  toGameLog($mysqli,"Der Virenschutzverkäufer(".getName($mysqli,$eigeneID).") aktviert die Trial bei ".$gameAssoc['nacht']." ".getName($mysqli,$id).".");
   
   //Setze mich noch auf bereit ;)
   setBereit($mysqli,$eigeneID,1);
@@ -3440,18 +3443,18 @@ function parErmInitialisiere($mysqli)
 {
   $spielID = $_COOKIE['SpielID'];
   
-  echo "<p>Möchten Sie Ihre Fähigkeit als Paranormaler Ermittler einsetzen?</p>";
+  echo "<p>Möchten Sie Ihre Fähigkeit als Ermittler einsetzen?</p>";
   //Zeige eine Liste aller lebenden Spieler an
   echo "<form action='Werwolf.php' method='post'>";
   echo '<input type="hidden" name="parErmHatAusgewaehlt" value=1 />';
-  echo "<p class='normal' >Welchen Spieler + (lebende) Nachbarn wollen Sie näher beobachten?</p>";
+  echo "<p class='normal' >Gegen welchen Spieler + (lebende) Nachbarn wollen Sie versuchen zu ermitteln ?</p>";
   echo "<p ><select name = 'parErmID' size = 1>";
   $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
   while ($temp = $alleSpielerRes->fetch_assoc())
   {
     echo "<option value = '".$temp['id']."'>".$temp['name']."</option>";
   }
-  echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Diese Person(en) beobachten"/></p></form>';
+  echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Gegen diese Person(en) ermitteln"/></p></form>';
   
   echo "<form action='Werwolf.php' method = 'post'>
     <input type = 'hidden' name='parErmNichtAuswaehlen' value=1 />
@@ -3502,15 +3505,15 @@ function parErmAusgewaehlt($mysqli, $id)
   if ($werwoelfe->num_rows > 0)
   {
     //Es ist zumindest ein Werwolf darunter
-    toPlayerLog ($mysqli,"Sie beobachteten die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2)." Es fällt Ihnen eine bedrohliche Aura auf, unter den dreien ist zumindest ein Werwolf.",$eigeneID);
-    toGameLog($mysqli,"Der Paranormale Ermittler beobachtete die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2).". Er sieht, dass sich unter ihnen zumindest ein Werwolf befindet.");
-    echo ("<p align = 'center'>Sie beobachteten die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2)." Es fällt Ihnen eine bedrohliche Aura auf, unter den dreien ist zumindest ein Werwolf.</p>");
+    toPlayerLog ($mysqli,"Sie ermitteln gegen die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2)." Es scheint zumindest ein Gamer unter ihnen zu sein.",$eigeneID);
+    toGameLog($mysqli,"Der Ermittler ermittelt gegen die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2).". Er sieht, dass sich unter ihnen zumindest ein Gamer befindet.");
+    echo ("<p align = 'center'>Sie beobachteten die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2)." Es scheint zumindest ein Gamer unter ihnen zu sein.</p>");
   }
   else
   {
-    toPlayerLog ($mysqli,"Sie beobachteten die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2).". Es fällt Ihnen nichts Besonderes auf, unter den dreien befindet sich kein Werwolf.",$eigeneID);
-    toGameLog($mysqli,"Der Paranormale Ermittler beobachtete die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2).". Er sieht, dass sich unter ihnen kein Werwolf befindet.");
-    echo ("<p align = 'center'>Sie beobachteten die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2).". Es fällt Ihnen nichts Besonderes auf, unter den dreien befindet sich kein Werwolf.</p>");
+    toPlayerLog ($mysqli,"Sie ermitteln gegen die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2).". Es sind vermutlich alles Streamer.",$eigeneID);
+    toGameLog($mysqli,"Der Ermittler ermittelt gegen die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2).". Er sieht, dass sich unter ihnen kein Gamer befindet.");
+    echo ("<p align = 'center'>Sie ermitteln gegen die Spieler ". getName($mysqli,$nachbar1) .", ". getName($mysqli,$id) ." und ".getName($mysqli,$nachbar2).". Es sind vermutlich alles Streamer.</p>");
   }
   
   $mysqli->Query("UPDATE $spielID"."_spieler SET parErmEingesetzt = 1 WHERE id = $eigeneID");
@@ -3531,25 +3534,25 @@ function hexeInitialisieren($mysqli)
   $gameAss = gameAssoc($mysqli);
   if ($gameAss['werwolfopfer']!=-1)
   {
-    echo "<p  class='normal'>Opfer der Werwölfe: ";
+    echo "<p  class='normal'>Opfer der Gamer: ";
     echo getName($mysqli,$gameAss['werwolfopfer']);
     echo "</p>";
     
     //Schreibe es auch in das Hexe log
     $nacht = $gameAss['nacht'];
     $name = getName($mysqli,$gameAss['werwolfopfer']);
-    toPlayerLog($mysqli,"In Nacht $nacht wählten die Werwölfe $name als Opfer.",$eigeneID);
+    toPlayerLog($mysqli,"In Nacht $nacht wählten die Gamer $name als Opfer.",$eigeneID);
     
     if ($heiltraenke > 0)
     {
       //Die Hexe fragen, ob sie das Opfer heilen will
-      echo "<p ><select name = 'hexeHeilen' size = 1><option value = '0' selected=true>Das Opfer nicht heilen</option><option value = '1'>Das Opfer heilen</option></select></p>";
+      echo "<p ><select name = 'hexeHeilen' size = 1><option value = '0' selected=true>Den Internetzugang des Opfers nicht reparieren</option><option value = '1'>Den Internetzugang des Opfers reparieren</option></select></p>";
     }
   }
   //Die Hexe fragen, ob sie jemanden töten will, wenn sie denn noch einen Trank hat ...
   if ($todestraenke > 0)
   {
-    echo "<p class='normal' >Sie dürfen Ihren Todestrank verwenden und jemanden töten. Wen wollen Sie töten?</p>";
+    echo "<p class='normal' >Sie dürfen Ihren Rootkit verwenden und jemanden zu sabotieren. Wen wollen Sie sabotieren?</p>";
     echo "<p ><select name = 'toeten' size = 1>";
     echo "<option value = '-1'>Niemanden</option>";
     $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
@@ -3559,7 +3562,7 @@ function hexeInitialisieren($mysqli)
     }
      echo '</select></p>';
   }
-  echo '<p id = "normal" align = "center"><input type="submit" value = "So als Hexe die Nacht beenden"/></p></form>';
+  echo '<p id = "normal" align = "center"><input type="submit" value = "So als IT-Spezialist die Nacht beenden"/></p></form>';
   echo "</form>";
 }
 
@@ -3571,14 +3574,14 @@ function jaegerInitialisiere($mysqli)
   //Zeige eine Liste aller noch lebenden an, die der Jäger töten kann
   echo "<form action='Werwolf.php' method='post'>";
   echo '<input type="hidden" name="jaegerHatAusgewaehlt" value=1 />';
-  echo "<p class='normal' >Sie als Jäger(in) dürfen einen Spieler mit in den Tod reißen: </p>";
+  echo "<p class='normal' >Sie als Hacker(in) dürfen einen Spieler ins digitale Nirvana bomben: </p>";
   echo "<p ><select name = 'jaegerID' size = 1>";
   $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
   while ($temp = $alleSpielerRes->fetch_assoc())
   {
     echo "<option value = '".$temp['id']."'>".$temp['name']."</option>";
   }
-  echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Diesen Spieler töten"/></p></form>';
+  echo '</select></p><p id = "normal" align = "center"><input type="submit" value = "Diesen Spieler mitnehmen"/></p></form>';
 }
 
 function buergermeisterInitialisiere($mysqli)
@@ -3590,7 +3593,7 @@ function buergermeisterInitialisiere($mysqli)
   //Zeige eine Liste aller noch Lebenden an, an die der Bürgermeister das Amt weitergeben kann
   echo "<form action='Werwolf.php' method='post'>";
   echo '<input type="hidden" name="buergermeisterNachfolger" value=1 />';
-  echo "<p class='normal' >Sie als Bürgermeister(in) dürfen einen Spieler als Ihren Nachfolger bestimmen: </p>";
+  echo "<p class='normal' >Sie als Influencer(in) dürfen einen Spieler als Ihren Nachfolger bestimmen: </p>";
   echo "<p ><select name = 'buergermeisterID' size = 1>";
   $alleSpielerRes = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
   while ($temp = $alleSpielerRes->fetch_assoc())
@@ -3778,7 +3781,7 @@ function writeGameToLog($mysqli)
   fwrite($myfile,$mitUmbruch);
   
   //Schreibe noch die Überlebenden
-  fwrite($myfile,"Die Überlebenden:\n");
+  fwrite($myfile,"Diese Spieler sind noch online:\n");
   $lebendQuery = $mysqli->Query("SELECT * FROM $spielID"."_spieler WHERE lebt = 1");
   while ($temp = $lebendQuery->fetch_assoc())
   {
@@ -3818,9 +3821,9 @@ function checkeSiegbedingungen($mysqli)
     if ($dorfbewohnerRes->num_rows <= 0)
     {
       //Die Werwölfe haben gewonnen ...
-      toGameLog($mysqli,"Die Werwölfe haben gewonnen.");
-      toAllPlayerLog($mysqli,"Die Werwölfe haben gewonnen.");
-      $mysqli->Query("UPDATE $spielID"."_game SET spielphase = ". PHASESIEGEREHRUNG .", tagestext = 'Die Werwölfe haben gewonnen'");
+      toGameLog($mysqli,"Die Gamer haben gewonnen.");
+      toAllPlayerLog($mysqli,"Die Gamer haben gewonnen.");
+      $mysqli->Query("UPDATE $spielID"."_game SET spielphase = ". PHASESIEGEREHRUNG .", tagestext = 'Die Gamer haben gewonnen'");
       //alle müssen reloaden
       $mysqli->Query("UPDATE $spielID"."_spieler SET reload = 1, bereit = 0");
       writeGameToLog($mysqli);
@@ -3830,9 +3833,9 @@ function checkeSiegbedingungen($mysqli)
   else
   {
     //Die Dorfbewohner haben gewonnen
-    toGameLog($mysqli,"Die Dorfbewohner haben gewonnen.");
-    toAllPlayerLog($mysqli,"Die Dorfbewohner haben gewonnen.");
-    $mysqli->Query("UPDATE $spielID"."_game SET spielphase = ". PHASESIEGEREHRUNG .", tagestext = 'Die Dorfbewohner haben gewonnen'");
+    toGameLog($mysqli,"Die Streamer haben gewonnen.");
+    toAllPlayerLog($mysqli,"Die Streamer haben gewonnen.");
+    $mysqli->Query("UPDATE $spielID"."_game SET spielphase = ". PHASESIEGEREHRUNG .", tagestext = 'Die Streamer haben gewonnen'");
     //alle müssen reloaden
     $mysqli->Query("UPDATE $spielID"."_spieler SET reload = 1, bereit = 0");
     writeGameToLog($mysqli);
@@ -3864,7 +3867,7 @@ function binTot()
 {
   //Zeige einen Button an, mit dem die Spiellog datei angezeigt werden kann.
   $spielID = $_COOKIE['SpielID'];
-  echo "<h3 >Sie sind leider bereits gestorben ...</h3>";
+  echo "<h3 >Sie sind leider offline ...</h3>";
   echo "<p class='normal' >Verhalten Sie sich ruhig und stören Sie nicht das Spiel der anderen. Verraten Sie keine Informationen, damit die anderen Spieler ihr Spielerlebnis genießen können.</p>";
   echo "<form name='list'><div id='listdiv'></div></form>"; //Auch als Toter will ich eine Liste haben :)
   echo "<form name='gameLogForm' id='gameLogForm' style='display:none'><div id='gamelogdiv'></div></form>";
@@ -3939,9 +3942,9 @@ function getName($mysqli, $spielerID)
 function getGesinnung($identitaet)
 {
   if ($identitaet == CHARWERWOLF || $identitaet == CHARURWOLF)
-    return "Werwölfe";
+    return "Gamer";
   else
-    return "Dorfbewohner";
+    return "Streamer";
 }
 
 function nachtidentitaetAlsString($identitaet)
@@ -3952,46 +3955,46 @@ function nachtidentitaetAlsString($identitaet)
       return "keine";
       break;
     case CHARDORFBEWOHNER:
-      return "Dorfbewohner";
+      return "Streamer";
       break;
     case CHARWERWOLF:
-      return "Werwolf";
+      return "Gamer";
       break;
     case CHARSEHER:
-      return "Seher/in";
+      return "BND Mitarbeiter/in";
       break;
     case CHARHEXE:
-      return "Hexe/r";
+      return "IT-Spezialist/in";
       break;
     case CHARJAEGER:
-      return "Jäger/in";
+      return "Hacker/Häckse";
       break;
     case CHARAMOR:
       return "Amor";
       break;
     case CHARBESCHUETZER:
-      return "Beschützer/in";
+      return "Virenschutzverkäufer/in";
       break;
     case CHARPARERM:
-      return "Paranormaler Ermittler";
+      return "Ermittler/in";
       break;
     case CHARLYKANTROPH:
-      return "Lykantroph/in";
+      return "Noob/in";
       break;
     case CHARSPION:
-      return "Spion/in";
+      return "ISP Mitarbeiter/in";
       break;
     case CHARMORDLUSTIGER:
-      return "Mordlustige(r)";
+      return "Petze(r)";
       break;
     case CHARPAZIFIST:
-      return "Pazifist/in";
+      return "Leecher/in";
       break;
     case CHARALTERMANN:
-      return "Die/Der Alte";
+      return "Der Sparfuchs";
       break;
     case CHARURWOLF:
-      return "Urwolf/Urwölfin";
+      return "Pro-Gamer";
       break;
     default:
       return "";
@@ -4008,54 +4011,53 @@ function nachtidentitaetKurzerklaerung($identitaet)
       break;
     case CHARDORFBEWOHNER:
       //Dorfbewohner
-      return "Beunruhigt durch das Auftauchen von Werwölfen, versuchen die Dorfbewohner wieder Frieden in das Dorf zu bringen, indem sie alle Werwölfe ausforschen und töten wollen.";
+      return "Sie bekommen natürlich mit, dass jeden Abend einer beim Videochatabend fehlt und versuchen herauszubekommen wer die Gamer unter Ihnen sind. Ist ein vermeintlich schuldiger gewählt wird er bei der Polizei angezeigt und seine Internetverbindung bis zum Abschluss der Ermittlungen erst mal gekappt.";
       break;
     case CHARWERWOLF:
       //Werwolf
-      return "Die Werwölfe töten jede Nacht einen Dorfbewohner, verhalten sich aber am Tag, als gehörten sie zu ihnen. Achtung: Die Dorfbewohner wollen den Werwölfen auf die Schliche kommen ...";
+      return "Sie kennen sich unter einander. Sie wählen jeden Abend einen Streamer aus den sie über z.B: Exploits im Router oder Schadsoftware auf dem Computer sabotieren und dadurch dauerhaft vom Streamen abhalten um Ihre eigenen Latenzen zu senken. Sie verhalten sich aber am Tag, als wären sie Streamer. Achtung: Die Streamer wollen den Gamern auf die Schliche kommen ...";
       break;
     case CHARSEHER:
       //Seher/in
-      return "Sie können jede Nacht die Nachtidentität eines Spielers sehen. Alternative: Sie sehen, welcher Gruppe derjenige angehört";
+      return "Sie schaffen beim BND und können auf der Arbeit beliebige Internetzugänge überwachen und den Datenverkehr genauer analysieren und somit herausfinden welchen Charakter der Überwachte Spieler hat.";
       break;
     case CHARHEXE:
       //Hexe
-      return "Sie können ein Mal im Spiel jemanden mit Ihrem Todestrank töten, ein Mal im Spiel das Opfer der Werwölfe retten. Entscheiden Sie weise, viel hängt davon ab ...";
+      return "Sie können einmal im Spiel jemanden mit Ihrem Rootkit sabotieren, einmal im Spiel das Opfer der Gamer mit einem Reserverouter retten. Entscheiden Sie weise, viel hängt davon ab ...";
       break;
     case CHARJAEGER:
       //Jäger/in
-      return "Wenn Sie getötet werden, können Sie nach einem letzten Griff zu Ihrer Flinte einen anderen Spieler mit in den Tod reißen";
+      return "Wenn Sie angezeigt oder sabotiert werden, können Sie durch eine Totmannschaltung einen anderen Spieler ins digitale Nirvana bomben";
       break;
     case CHARAMOR:
       //Amor
-      return "Zu Beginn des Spieles dürfen Sie zwei Personen bestimmen, die sich verlieben. Stirbt die eine Person, begeht die andere aus Kummer Selbstmord";
+      return "Zu Beginn des Spieles dürfen Sie zwei Personen bestimmen, die sich verlieben. Wird die eine Person sabotiert oder angezeigt, geht die andere aus Kummer auch offline";
       break;
     case CHARBESCHUETZER:
       //Leibwächter/Beschützer
-      return "Sie können jede Nacht einen Spieler beschützen, der in dieser Nacht nicht sterben kann (Sie können sich auch selbst wählen). Sie dürfen nicht zwei Nächte hintereinander dieselbe Person schützen.";
+      return "Sie installieren jede Nacht bei einem Spieler die 1-Tages Trialversion einer Internetsecurity Software. Der beschützte Spieler kann dann nicht sabotiert werden, leider gehen Sie offline, falls der beschützte Spieler angegriffen wird (Sie können die Software auch bei sich installieren und gehen dadurch bei versuchter Sabotage nicht offline) Sie dürfen die Trial nicht zwei Nächte hinter einander beim selben Spieler aktivieren.";
       break;
     case CHARPARERM:
-      return "Sie können einmal im Spiel einen Spieler bestimmen und erfahren, ob sich unter diesem und den beiden Nachbarn zumindest ein Werwolf (oder Urwolf) befindet.";
+      return "Sie arbeiten bei der Polizei und bekommen von alldem recht wenig mit und verstehen auch nix davon. Sie können einmal im Spiel versuchen etwas zu ermitteln, können dabei aber lediglich feststellen, ob sich unter diesem und den beiden Nachbarn zumindest ein Gamer oder Pro-Gamer befindet.";
       break;
     case CHARLYKANTROPH:
-      return "Sie sehen aus wie ein Werwolf, sind aber keiner. Sie spielen also für die Dorfbewohner";
+      return "Sie spielen für die Streamer führen sich aber auf wie ein Gamer und werden deshalb von vielen Charakteren als Gamer erkannt, also sollten Sie auf der Hut sein.";
       break;
     case CHARSPION:
       //Spion
-      return "Sie können jede Nacht einen Spieler auswählen und eine Identität, die dieser Spieler haben könnte. Sie erfahren, ob dieser
-      Spieler tatsächlich diese Identität besitzt";
+      return "Sie können auf der Arbeit beliebige Internetzugänge überwachen und prüfen ob der überwachte Spieler den Charakter hat den er vorgibt zu besitzen.";
       break;
     case CHARMORDLUSTIGER:
-      return "Sie wollen Blut sehen und argumentieren daher immer für das Töten eines Spielers";
+      return "Sie haben die 112 auf der Schnellwahltaste auf Ihrem Telefon. Sie zeigen die Nachbarn beim Falschparken an und filmen die Wiese um den Hundebeseitzer zu finden der seinen Hund da immer draufkacken lässt.";
       break;
     case CHARPAZIFIST:
-      return "Sie wollen, dass alle möglichst friedlich zusammenleben und argumentieren daher immer gegen das Töten eines Spielers";
+      return "Sie machen selber im Internet viele halblegale Sachen und haben deshalb kein Interesse daran die Polizei zu rufen.";
       break;
     case CHARALTERMANN:
-      return "Sie sterben in der x. Nacht, wobei x die Anzahl der lebenden Werwölfe + 1 ist. Es kann also sein, dass sie früher sterben als gedacht ...";
+      return "Sie haben schon länger nicht mehr in neuere Hardware investiert. Ihr Internetrouter gibt im Laufe des Spiels den Geist auf und zwar um so früher, je weniger Gamer noch online sind. Sind zwei Gamer online, gehen Sie in der dritten Nacht offline. Bei drei Gamern in der vierten usw. Geht aber ein Gamer während des Spiels offline, was ja durchaus möglich ist, gehen Sie früher offline als Sie gedacht haben ...";
       break;
     case CHARURWOLF:
-      return "Sie gehören zu den Werwölfen und gewinnen bzw. verlieren mit ihnen. Einmal pro Spiel können Sie einen Spieler zum Werwolf machen, der dann alle bisherigen Fähigkeiten verliert ...";
+      return "Sie haben aber auch unter den Streamern Fans und können einmal im Spiel einen Streamer zum Gamer machen. Dieser Spieler verliert dann alle seine bisherigen Fähigkeiten und spielt ab diesem Zeitpunkt für die Gamer ...";
       break;
   }
 }
@@ -4132,88 +4134,64 @@ function getDorfbewohnerText()
   switch($i)
   {
     case 0:
-      $text = "Du erwachst aus deinem Schlaf, siehst dich um, bemerkst aber nichts Außergewöhnliches.
-      Du legst dich wieder hin und versuchst weiterzuschlafen. Was für ein seltsamer Traum ...";
+      $text = "Du erwachst aus deinem Schlaf, checkst kurz die E-Mails, bemerkst aber nichts Außergewöhnliches. Du legst dich wieder hin und versuchst weiterzuschlafen. Was für ein seltsamer Traum ...";
       break;
     case 1:
-      $text = "Schweißgebadet erwachst du ... doch nichts hat sich bewegt, alles ist so, wie es auch
-      am Tag davor war ... oder etwa nicht? Irgendwie hast du ein seltsames Gefühl ...";
+      $text = "Schweißgebadet erwachst du ... doch es hat du-da-ding gemacht, alles ist so, wie es auch am Tag davor war ... oder etwa nicht? Irgendwie hast du ein seltsames Gefühl ...";
       break;
     case 2:
-      $text = "Ein Albtraum war es, aus dem du erwachst ... Was hat dies zu bedeuten?
-      Wie soll es mit dem Dorf weitergehen? Fragen über Fragen ...";
+      $text = "Ein Albtraum war es, aus dem du erwachst ... Was hat dies zu bedeuten? Wie soll es mit dem Internet weitergehen? Fragen über Fragen ...";
       break;
     case 3:
-      $text = "Das ungute Gefühl verlässt dich auch im Schlaf nicht ... Bist du vielleicht der Nächste?
-      Wer hat sich gegen dich verschworen? Wer will dich tot sehen? Alles Fragen über Fragen, auf die du keine Antwort kennst ...";
+      $text = "Das ungute Gefühl verlässt dich auch im Schlaf nicht ... Bist du vielleicht der Nächste? Wer hat sich gegen dich verschworen? Wer will dich offline sehen? Alles Fragen über Fragen, auf die du keine Antwort kennst ...";
       break;
     case 4:
-      $text = "Der Button mit der Aufschrift 'Log anzeigen' ermöglicht dir das Nachlesen von wichtigen Ereignissen,
-      die sich bereits im Spiel ereignet haben. Außerdem sind darin bei verschiedenen Charakteren wichtige Informationen gespeichert,
-      wie beispielsweise, wen der Seher aller gesehen hat ...";
+      $text = "Der Button mit der Aufschrift 'Log anzeigen' ermöglicht dir das Nachlesen von wichtigen Ereignissen, die sich bereits im Spiel ereignet haben. Außerdem sind darin bei verschiedenen Charakteren wichtige Informationen gespeichert, wie beispielsweise, wen der BND Mitarbeiter alles überwacht hat ...";
       break;
     case 5:
-      $text = "Der Bürgermeister / Die Bürgermeisterin hält eine gewisse Machtposition inne. Er/Sie entscheidet, wann von der Diskussion
-      zur Anklage und dann zur Abstimmung übergegangen werden soll. Entscheidet also weise, wen ihr in diesem Amt sehen wollt.";
+      $text = "Der Influencer / Die Influencerin hält eine gewisse Machtposition inne. Er/Sie entscheidet, wann von der Diskussion zur Anklage und dann zur Abstimmung übergegangen werden soll. Entscheidet also weise, wen ihr in diesem Amt sehen wollt.";
       break;
     case 6:
-      $text = "Der Seher/Die Seherin kann jede Runde die Identität einer Person sehen ... Das könnte sich für die Dorfbewohenr als nützlich,
-      für die Werwölfe aber als Bedrohung erweisen ...";
+      $text = "Der BND Mitarbeiter kann jede Runde einen Internetzugang überwachen und so die Identität einer Person sehen ... Das könnte sich für die Streamer als nützlich, für die Gamer aber als Bedrohung erweisen ...";
       break;
     case 7:
-      $text = "Die Hexe kann einmal im Spiel jemanden töten, einmal im Spiel das Opfer der Werwölfe heilen. Sie ist somit ein starker
-      Charakter auf Seiten der Dorfbewohner ... Mit ihrer Hilfe wird es möglich sein, die Werwölfe zu stoppen";
+      $text = "Der IT-Spezialist kann einmal im Spiel jemanden mit einem Rootkit sabotieren, einmal im Spiel den Internetzugang des Opfers der Gamer mit einem Reserverouter reparieren. Er ist somit ein starker Charakter auf Seiten der Streamer ... Mit seiner Hilfe wird es möglich sein, die Gamer zu stoppen";
       break;
     case 8:
-      $text = "Blutrünstige Werwölfe, die des Nachts über Unschuldige herfallen, haben das Dorf heimgesucht. Nun ist es an den Dorfbewohnern,
-      die Werwölfe zu entlarven und sie ihrer gerechten Strafe zuzuführen ... Bedenkt aber, die Werwölfe verhalten sich am Tag wie
-      Dorfbewohner und versuchen, jeden Verdacht von ihnen abzulenken ... Seid also wachsam...";
+      $text = "Latenzsüchtige Gamer, die des Nachts den Internetzugang derjenigen sabotieren die zu viel Bandbreite benutzen, haben das Internet heimgesucht. Nun ist es an den Streamern, die Gamer zu entlarven und sie bei der Polizei anzuzeigen ... Bedenkt aber, die Gamer verhalten sich am Tag wie Streamer und versuchen, jeden Verdacht von ihnen abzulenken ... Seid also wachsam...";
       break;
     case 9:
-      $text = "Der Jäger / Die Jägerin ist ein Charakter mit erstaunlicher Reaktionszeit ... Wenn er den Tod an seine Tür pochen hört, kann
-      er nach einem letzten Griff zu seiner Flinte einen anderen Spieler mit in den Tod reißen ... Der/Die Jäger(in) sollte jedoch weise
-      entscheiden, wen er mit in den Tod reißt";
+      $text = "Der Hacker / Die Häckse ist ein Charakter bei dem sich Genie und Paranoia kreuzen. Er hat sich gegen physische und digitale Angriffe durch eine Totmannschaltung gesichert um einen Mitspieler mit ins digitale Nirvana zu reißen. Der Hacker sollte jedoch weise entscheiden, wen er da vermeintlich für alles verantwortlich macht ...";
       break;
     case 10:
-      $text = "Zu Beginn des Spieles kann Amor zwei Personen bestimmen, die sich verlieben. Stirbt eine der beiden, begeht die andere aus Kummer Selbstmor.
-      Ziel der Verliebten ist es, mit ihrer Gruppierung (Dorfbewohner, Werwölfe) zu gewinnen, wenn sie der gleichen angehören.
-      Sollten Sie verschiedenen Gruppierungen angehören, gewinnen sie, wenn sie alle anderen töten ... Also Achtung Dorfbewohner,
-      vielleicht gibt es Verliebte unter euch, die nach eurem Untergang trachten ...";
+      $text = "Zu Beginn des Spieles kann Amor zwei Personen bestimmen, die sich verlieben. Wird einer der beiden angezeigt oder sabotiert, geht auch der andere aus Trauer offline. Ziel der Verliebten ist es, mit ihrer Gruppierung (Streamer, Gamer) zu gewinnen, wenn sie der gleichen angehören. Sollten Sie verschiedenen Gruppierungen angehören, gewinnen sie, wenn sie alle anderen gegen einander ausspielen ... Also Achtung Streamer, vielleicht gibt es Verliebte unter euch, die Euch offline sehen wollen ...";
       break;
     case 11:
-      $text = "Die Dorfbewohner sind verzweifelt ... Wer wird der nächste sein? Wen aus ihrer Mitte werden die Werwölfe als nächstes
-      zum Tode verdammen? Es ist ein riskantes Spiel, das sie treiben, und doch scheinen sie davonzukommen ... doch wie lange noch?";
+      $text = "Die Streamer sind verzweifelt ... Wer wird der nächste sein? Wen aus ihrer Mitte werden die Gamer als nächstes sabotieren? Es ist ein riskantes Spiel, das sie treiben, und doch scheinen sie davonzukommen ... doch wie lange noch?";
       break;
     case 12:
-      $text = "Der Paranormale Ermittler kann einmal im Spiel fühlen, ob sich unter drei benachbarten Personen ein Werwolf befindet.
-      Können die Dorfbewohner mit seiner Hilfe den Werwölfen das Handwerk legen?";
+      $text = "Der Ermittler kann einmal im Spiel versuchen etwas zu ermitteln, kann dabei aber lediglich feststellen, ob sich unter drei beanachbarten Spielern ein Gamer oder Pro-Gamer befindet. Können die Streamer mit seiner Hilfe den Gamern das Handwerk legen?";
       break;
     case 13:
-      $text = "Der Lykantroph / Die Lykantrophin sieht bloß aus wie ein Werwolf, obwohl sie selbst keiner ist ...
-      Eine gefährliche Tatsache ...";
+      $text = "Der Noob führt sich wie ein Gamer auf ist aber keiner. Eine gefährliche Tatsache ...";
       break;
     case 14:
-      $text = "Der Spion / Die Spionin kann jede Nacht die Identität eines Spielers überprüfen. Er / Sie kann so herausfinden,
-      ob der Spieler wirklich der ist, für den er sich ausgibt ...";
+      $text = "Der ISP Mitarbeiter jede Nacht den Internetzugang eines Spielers prüfen. Er / Sie kann so herausfinden, ob der Spieler wirklich der ist, für den er sich ausgibt ...";
       break;
     case 15:
-      $text = "Die/Der Mordlustige will Blut sehen und argumentiert daher immer für den Tod eines Spielers.";
+      $text = "Die/Der Petze hat die 112 auf der Schnellwahltaste und argumentiert daher immer dafür einen Spielers anzuzeigen.";
       break;
     case 16:
-      $text = "Der Pazifist / Die Pazifistin ist zutiefst unzufrieden und will nicht, dass überhaupt jemand getötet wird,
-      daher argumentiert sie / er stets gegen das Töten eines Spielers";
+      $text = "Der Leecher / Die Leecherin macht selber im Internet viele halblegale Sachen und hat deshalb kein Interesse daran die Polizei zu rufen.";
       break;
     case 17:
-      $text = "Die/Der Alte stirbt im Laufe des Spiels, und zwar abhängig davon, wie viele Werwölfe noch am Leben sind.";
+      $text = "Der Sparfuchs geht im Laufe des Spiels aufgrund eines Hardwaredefektes offline, und zwar abhängig davon, wie viele Gamer noch online sind.";
       break;
     case 18:
-      $text = "Der Urwolf / Die Urwölfin spielt gemeinsam mit den Werwölfen, kann aber einmal im Spiel einen Spieler zum Werwolf machen, der daraufhin alle seine bisherigen Fähigkeiten verliert.";
+      $text = "Der Pro-Gamer hat auch unter den Streamern Fans und kann deshalb einmal im Spiel einen Streamer zum Gamer machen, der daraufhin alle seine bisherigen Fähigkeiten verliert.";
       break;
     default:
-      $text = "Ein dunkler Schatten hat sich über das Dorf gelegt. Beunruhigt und verängstigt versuchen die übrig gebliebenen Dorfbewohner
-      die drohende Gefahr der Werwölfe abzuwehren. Doch sie werden immer weniger. Schon wieder gab es ein Opfer aus ihren Reihen ...
-      Wer ist unschuldig, und wer ein Lügner? Wer sagt die Wahrheit, wer steckt hinter alledem? Es sind düstere Zeiten, in denen
-      das Dorf nun ums Überleben kämpfen muss ...";
+      $text = "Ein dunkler Schatten hat sich über das Internet gelegt. Beunruhigt und verängstigt versuchen die übrig gebliebenen Streamer die drohende Gefahr der Gamer abzuwehren. Doch sie werden immer weniger. Schon wieder gab es ein Opfer aus ihren Reihen ... Wer ist unschuldig, und wer ein Lügner? Wer sagt die Wahrheit, wer steckt hinter alledem? Es sind düstere Zeiten, in denen jedes kbit zählt ...";
       break;
   }
   return $text;
